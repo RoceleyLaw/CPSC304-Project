@@ -1,0 +1,25 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "this is the RESTful Api created for the CPSC304 project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "RESTful",
+    "API"
+  ],
+  "author": "Roceley Si Yan Luo",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": ""
+  },
+  "dependencies": {
+    "body-parser": "",
+    "express": "",
+    "mongoose": "",
+    "mysql": ""
+  }
+}
