@@ -3,6 +3,31 @@ var express = require('express');
 var app = express();
 var mysql = require('mysql');
 var port = process.env.PORT || 3001;
+var con=require('./dbconnection'); //reference of dbconnection.js
+ 
+var Task={
+ 
+getAllTasks:function(callback){
+ 
+return db.query("Select * from task",callback);
+ 
+},
+ getTaskById:function(id,callback){
+ 
+return db.query("select * from task where Id=?",[id],callback);
+ },
+ addTask:function(Task,callback){
+ return db.query("Insert into task values(?,?,?)",[Task.Id,Task.Title,Task.Status],callback);
+ },
+ deleteTask:function(id,callback){
+  return db.query("delete from task where Id=?",[id],callback);
+ },
+ updateTask:function(id,Task,callback){
+  return db.query("update task set Title=?,Status=? where Id=?",[Task.Title,Task.Status,id],callback);
+ }
+ 
+};
+ module.exports=Task;
 
 
 //define a route, usually this would be a bunch of routes imported from another file
@@ -26,16 +51,21 @@ console.log('API server started on: ' + port);
 //Possible issue 1: authentication or protocol error
 //Solution 1: run this SQL command on your db instance
 //   ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password' 
-var con = module.exports = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "password"
-  });
+// var con = module.exports = mysql.createConnection({
+//     host: "localhost",
+//     user: "root",
+//     password: "password"
+//   });
  
-con.connect(function(err) {
-    if (err) throw err;
-      con.query("SELECT * FROM persons.persons", function (err, result, fields) {
-        if (err) throw err;
-        console.log(result);
-      });
-  });   
+// con.connect(function(err) {
+//     if (err) throw err;
+//       con.query("SELECT * FROM persons.persons", function (err, result, fields) {
+//         if (err) throw err;
+//         console.log(result);
+//       });
+//   }); 
+  
+con.query("SELECT * FROM persons.persons", function (err, result, fields) {
+  if (err) throw err;
+  console.log(result);
+});
