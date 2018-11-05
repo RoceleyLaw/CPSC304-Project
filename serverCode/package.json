@@ -18,7 +18,9 @@
   },
   "dependencies": {
     "body-parser": "",
-    "express": "",
+    "bookshelf": "^0.13.3",
+    "express": "^4.16.4",
+    "knex": "^0.13.0",
     "mongoose": "",
     "mysql": ""
   }
