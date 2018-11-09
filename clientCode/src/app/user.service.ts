@@ -16,7 +16,7 @@ export class UserService {
    }
 
   fetchStories(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/users`, {headers: this.headers})
+    return this.http.get(`${this.baseUrl}/allpersons`, {headers: this.headers})
                     .map(response => response.json());
                   }
 

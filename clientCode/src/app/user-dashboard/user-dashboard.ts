@@ -19,7 +19,6 @@ export class UserDashboard implements OnInit {
       items => this.items = items,
       error => console.log('Error fetching stories!'),
       )
-      console.log(this.items)
     }
 
 }
