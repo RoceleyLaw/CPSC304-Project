@@ -1,4 +1,3 @@
-USE persons;
 insert into Persons (PersonID, LastName, FirstName, DetailAddress, City) values (1, 'Cesar', 'Tythacott', 'ctythacott0@symantec.com', 'Barqueiro');
 insert into Persons (PersonID, LastName, FirstName, DetailAddress, City) values (2, 'Bren', 'Boddice', 'bboddice1@addthis.com', 'Mont-de-Marsan');
 insert into Persons (PersonID, LastName, FirstName, DetailAddress, City) values (3, 'Kalie', 'Girardy', 'kgirardy2@google.fr', 'Kahrīz');
