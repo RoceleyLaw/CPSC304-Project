@@ -1,6 +1,6 @@
 //testing request
 
-var ROUTE_URL = "https://cpen400a-bookstore.herokuapp.com/products"; 
+var ROUTE_URL = "https://evening-fjord-94245.herokuapp.com/allpersons"; 
 
 var ajaxGet = function(url, onSuccess, onError){
     var xhttp = new XMLHttpRequest();
