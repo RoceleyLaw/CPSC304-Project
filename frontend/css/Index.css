@@ -1,0 +1,39 @@
+body {
+    width: 1000px;
+    margin: auto;
+}
+
+/*
+    HEADER DIV STYLING
+*/
+
+#header {
+    height: 120px;
+    background-color: green; 
+    margin-bottom: 20px; 
+}
+
+#header-title {
+    position: absolute;
+    top: 0px; 
+    color: white;
+    font-size: 35px;
+}
+
+.jumbotron {
+    background-color: green; 
+}
+/*
+    CONTENT DIV STYLING
+*/
+
+#content-div {
+    text-align: center; 
+}
+
+.sign-in-button {
+    font-size: 20px;
+    margin-bottom: 10px;
+    background-color: lightgreen; 
+}
+
