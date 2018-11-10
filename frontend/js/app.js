@@ -1,6 +1,14 @@
 //testing request
 
-var ROUTE_URL = "https://evening-fjord-94245.herokuapp.com/allpersons"; 
+var ROUTE_URL = "https://evening-fjord-94245.herokuapp.com/allpersons";
+
+var postData = {
+    PersonID : 100, 
+    LastName : "Smith", 
+    FirstName : "Joe", 
+    DetailAddress : "sj@gmail.com",
+    City : "Vancouver"
+}
 
 var ajaxGet = function(url, onSuccess, onError){
     var xhttp = new XMLHttpRequest();
@@ -41,6 +49,25 @@ var ajaxGet = function(url, onSuccess, onError){
     xhttp.send();
 }
 
+var ajaxPost = function(url, onSuccess, onError){
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", url, true);
+
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    //xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    xhttp.onreadystatechange = function() { // Call a function when the state changes.
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            // Request finished. Do processing here.
+            var products = JSON.parse(xhttp.responseText); //convert payload to object
+            onSuccess(products);
+        }
+    }
+
+    //xhttp.send("foo=bar&lorem=ipsum"); 
+    xhttp.send(JSON.stringify(postData)); 
+}
+
 
 window.onload = function() {
     ajaxGet(ROUTE_URL, 
@@ -50,4 +77,13 @@ window.onload = function() {
         function(error){
             console.log(error);
         }); 
+
+
+    ajaxPost("http://httpbin.org/post", 
+            function(returnObject){
+                console.log(returnObject);
+            }, 
+            function(error){
+                console.log(error); 
+            }); 
 }
