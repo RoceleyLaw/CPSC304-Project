@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 550px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      width: 15%;
+      height: 100%;
+    }
+       
+    .navbar-inverse{
+      background-color: green;
+    } 
+    /* On small screens, set height to 'auto' for the grid */
+    @media screen and (max-width: 767px) {
+      .row.content {height: auto;} 
+    }
+    #header{
+      color: white;
+    }
+    #menuHeaders{
+      color: white;
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a id="header" class="navbar-brand">Home Hunter</a>
+    </div>
+   
+    <ul class="nav navbar-nav navbar-right">
+      <li><a id="menuHeaders" href="./listings.html"></span>Listings</a></li>
+      <li><a id="menuHeaders" href="./appointments.html"></span>Appointments</a></li>
+      <li><a id="menuHeaders" href="../index.html"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-3 sidenav hidden-xs">
+    <h2>Filter By</h2>
+      <ul class="nav nav-pills nav-stacked">
+        <label>Type</label>
+        <div class="radio">
+          <label><input type="radio" name="opt" checked>House</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="opt">Appartment</label>
+        </div>
+       <label>Facilities</label>
+       <div class="checkbox">
+          <label><input type="checkbox" value="">PlayGround</label>
+      <div class="checkbox">
+          <label><input type="checkbox" value="">Elementry School</label>
+      </div>
+      <div class="checkbox">
+           <label><input type="checkbox" value="">High School</label>
+      </div> 
+      <button type="button" class="btn btn-primary">Apply</button>
+      <button type="button" class="btn btn-primary">Reset</button>
+      </ul><br>
+    </div>
+    <br>
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="well">
+            <h4>House 1</h4>
+            <p>1 Million</p> 
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="well">
+            <h4>House 2</h4>
+            <p>100 Million</p> 
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="well">
+            <h4>House 3</h4>
+            <p>10 Million</p> 
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="well">
+            <h4>House 4</h4>
+            <p>30%</p> 
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="well">
+            <h4>House 5</h4>
+            <p>30%</p> 
+        </div>
+        </div>
+      </div>
+    </br>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

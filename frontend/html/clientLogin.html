@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="/Users/Rai/Desktop/smartpac/style.css">
 </head>
 <body>
   
@@ -31,7 +30,7 @@
     
                     <div class="form-group form-group-lg">
                         <div class="col-sm-4 col-sm-offset-8">
-                            <button type="submit" class="bbtn btn-primary btn-lg">Login</button>
+                            <button type="submit" onclick="check()" class="bbtn btn-primary btn-lg">Login</button>
                         </div>
                     </div>
     
@@ -41,11 +40,14 @@
 <!--TODO: MAKE IT CHECK WITH DATABASE INSTEAD OF HARD CODING-->
 <script>
   function check() {
+     console.log("HELOOOOO"); 
 	 var name = document.getElementById("usr").value;
 	 var password = document.getElementById("pwd").value;
 
 	 if(name =="bag1" &&  password == "9460"){
-		  window.alert("successful");
+          //window.alert("successful");
+          console.log("HI"); 
+          window.open("http://127.0.0.1:5500/html/listings.html");
 
 	 }
 	 else {
