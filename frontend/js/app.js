@@ -1,5 +1,4 @@
-//testing request
-
+//ROUTES 
 var ROUTE_URL = "https://evening-fjord-94245.herokuapp.com";
 var ALL_PERSONS = "/allpersons"; 
 var ALL_POSTS = "/allposts"; 
@@ -18,17 +17,19 @@ var postData = {
     DetailAddress : "ws@gmail.com",
     City : "Burnaby"
 }
-
 var putData = {
-    test1: "HELLO", 
-    test2: "WORLD"
+    listingID: "68717",
+    listedPrice: 1607638,
+    postalCode: "01129",
+    pictureURL: "http://dummyimage.com/236x226.jpg/5fa2dd/ffffff",
+    bedroom: 100,
+    bathroom: 1,
+    licenseNumber: "9737702"
 }
 
-var deleteData = {
-    test1: "HI", 
-    test2: "THERE"
-}
-
+/*
+    GET 
+*/
 var ajaxGet = function(url, onSuccess, onError){
     var xhttp = new XMLHttpRequest();
     xhttp.timeout = 3000; // timeout set to 2 seconds 
@@ -68,6 +69,9 @@ var ajaxGet = function(url, onSuccess, onError){
     xhttp.send();
 }
 
+/*
+    POST
+*/
 var ajaxPost = function(url, onSuccess, onError){
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", url, true);
@@ -89,6 +93,9 @@ var ajaxPost = function(url, onSuccess, onError){
     xhttp.send(JSON.stringify(postData)); 
 }
 
+/*
+    PUT
+*/
 var ajaxPut = function(url, onSuccess, onError){
     var xhttp = new XMLHttpRequest(); 
     xhttp.open("PUT", url, true); 
@@ -107,9 +114,15 @@ var ajaxPut = function(url, onSuccess, onError){
     xhttp.send(JSON.stringify(putData)); 
 }
 
+
+/*
+    DELETE
+*/
 var ajaxDelete = function(url, onSuccess, onError) {
     var xhttp = new XMLHttpRequest(); 
     xhttp.open("DELETE", url, true); 
+
+    xhttp.withCredentials = false; 
 
     xhttp.setRequestHeader("Content-Type", "application/json"); 
 
@@ -122,12 +135,15 @@ var ajaxDelete = function(url, onSuccess, onError) {
         }
     }
 
-    xhttp.send(JSON.stringify(deleteData)); 
+    xhttp.send(null); 
 }
 
 
+/*
+    call methods to test them 
+*/
 window.onload = function() {
-    ajaxGet(ROUTE_URL + ALL_POSTS + "/59727", 
+    ajaxGet(ROUTE_URL + ALL_POSTS, 
         function(testObject){
             console.log("GET SUCCESS"); 
             console.log(testObject);
@@ -148,7 +164,9 @@ window.onload = function() {
                 console.log(error); 
             });
             
-    ajaxPut(TEST_PUT, 
+    ajaxPut(
+            //TEST_PUT, 
+            ROUTE_URL + ALL_POSTS + "/68717",
             function(smth){
                 console.log("PUT SUCCESS"); 
                 console.log(smth);
@@ -158,7 +176,8 @@ window.onload = function() {
                 console.log(error); 
             }); 
 
-    ajaxDelete(TEST_DELETE, 
+    ajaxDelete(
+                ROUTE_URL + ALL_POSTS + "/97220",
                 function(smth){
                     console.log("DELETE SUCCESS");
                     console.log(smth); 
