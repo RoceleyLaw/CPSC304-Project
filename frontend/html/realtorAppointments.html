@@ -23,7 +23,15 @@
             #createApptButton{
             float:right;
             }
+            #createOpenHouseButton{
+            padding-top: 25px;
+            }
+            
             #AppointmentTable{
+            padding-left: 100px;
+            padding-right: 100px;
+            }
+            #OpenHouseTable{
             padding-left: 100px;
             padding-right: 100px;
             }
@@ -53,7 +61,7 @@
         </div>
       </nav>
       <div>
-            <h1>My Appointments</h1>
+            <h2>My Appointments</h2>
             <div id="AppointmentTable"> 
               <table class="table">
                <thead>
@@ -95,6 +103,8 @@
                 </tbody>
               </table>
             </div>
+        </div>
+        <div>
             <h2>Create Appointment</h2>
             <form>
               <div>
@@ -131,6 +141,88 @@
                 </div>
               </div>
             </form>
+        </div>
+        <br>
+        <br>
+        <div>
+                <h2>Open House Bookings</h2>
+                <div id="OpenHouseTable"> 
+                  <table class="table">
+                   <thead>
+                      <tr>
+                        <th>Listing ID</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Date</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>121212</td>
+                        <td>15:00</td>
+                        <td>17:00</td>
+                        <td>10-9-2018</td>
+                        <td>
+                          <button type="button" class="btn btn-danger">Delete</button>
+                      </td>
+                     </tr>
+                      <tr>
+                        <td>131313</td>
+                        <td>17:00</td>
+                        <td>19:00</td>
+                        <td>10-9-2018</td>
+                        <td>
+                          <button type="button" class="btn btn-danger">Delete</button>
+                      </td>
+                     </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+            <div>
+                    <h2>Create Open House</h2>
+                    <form>
+                            <div>
+                            <!--
+                            <div class="form-group form-group-lg">
+                              <label class="col-sm-2 control-label" for="lg">Realtor</label>
+                              <label class="col-sm-2 control-label" for="lg">Time</label>
+                              <label class="col-sm-2 control-label" for="lg">Location</label>
+                            </div> 
+                            -->
+                        
+                              <div class="form-group col-md-2">
+                                <label>Listing ID</label>
+                                <!--<input type="" class="form-control" placeholder="Name">-->
+                                <select class="form-control">
+                                  <option>Select Listing ID</option>
+                                  <option>Option 1</option>
+                                  <option>Option 2</option>
+                                  <option>Option 3</option>
+                                  <option>Option 4</option>
+                                  <option>Option 5</option>
+                                  </select>
+                              </div>
+                              <div class="form-group col-md-2">
+                                <label>Start Time</label>
+                                <input type="" class="form-control" placeholder="XX:XX">
+                              </div>
+                              <div class="form-group col-md-2">
+                                <label>End Time</label>
+                                <input type="" class="form-control" placeholder="">
+                              </div>
+                              <div class="form-group col-md-2">
+                                    <label>Date</label>
+                                    <input type="" class="form-control" placeholder="">
+                                  </div>
+                              <div id="createOpenButton" class="form-group col-md-2">
+                                <button type="button" class="btn btn-success">Create</button>
+                              </div>
+                            </div>
+                          </form>
+                </div>
+
             <!-- Modal -->
             <div class="modal fade" id="myModal" role="dialog">
               <div class="modal-dialog">
@@ -140,24 +232,16 @@
                       <h4 class="modal-title">Update Appointment</h4>
                     </div>
                     <div class="modal-body">
-                      <label>Realtor</label>
-                        <!--<input type="" class="form-control" placeholder="Name">-->
-                      <select class="form-control">
-                      <option>Select Realtor</option>
-                      <option>Option 1</option>
-                      <option>Option 2</option>
-                      <option>Option 3</option>
-                      <option>Option 4</option>
-                      <option>Option 5</option>
-                      </select>
-                      <label>Start Time</label>
-                      <input type="" class="form-control" placeholder="XX:XX">
-                      <label>End Time</label>
-                      <input type="" class="form-control" placeholder="XX:XX">
-                      <label>Date</label>
-                      <input type="" class="form-control" placeholder="">  
-                      <label>Location</label>
-                      <input type="" class="form-control" placeholder="">   
+                        <label>Client Phone Number</label>
+                        <input type="" class="form-control" placeholder="(XXX)-XXX-XXXX">
+                        <label>Start Time</label>
+                        <input type="" class="form-control" placeholder="XX:XX">
+                        <label>End Time</label>
+                        <input type="" class="form-control" placeholder="XX:XX">
+                        <label>Date</label>
+                        <input type="" class="form-control" placeholder="">  
+                        <label>Location</label>
+                        <input type="" class="form-control" placeholder="">   
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-success" data-dismiss="modal">Update</button>
