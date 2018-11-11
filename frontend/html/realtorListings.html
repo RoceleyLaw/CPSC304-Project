@@ -53,13 +53,16 @@
 <div class="container-fluid">
   <div class="row content">
     <div class="col-sm-3 sidenav hidden-xs">
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Add New Listing</button>           
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createModal">Add New Listing</button>           
         <h2>Filter By</h2>
       <ul class="nav nav-pills nav-stacked">
         <label>Type</label>
         <div class="radio">
-          <label><input type="radio" name="opt" checked>House</label>
+          <label><input type="radio" name="opt" checked>Both</label>
         </div>
+        <div class="radio">
+            <label><input type="radio" name="opt" >House</label>
+          </div>
         <div class="radio">
           <label><input type="radio" name="opt">Appartment</label>
         </div>
@@ -81,70 +84,227 @@
         <div class="col-sm-3">
           <div class="well">
             <h4>House 1</h4>
-            <p>1 Million</p> 
+            <p>Listed Price</p> 
+            <p>Street Name</p> 
+            <p>City</p> 
+            <p>Province</p> 
+            <p>Postal Code</p> 
+            <p>Number of Bedrooms</p>
+            <p>Number of Bathrooms</p>  
+            <button type="button" class="btn btn-primary">Delete</button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#soldModal">Sold</button>                   
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal">Edit</button>                   
           </div>
         </div>
         <div class="col-sm-3">
-          <div class="well">
-            <h4>House 2</h4>
-            <p>100 Million</p> 
+            <div class="well">
+              <h4>House 1</h4>
+              <p>Listed Price</p> 
+              <p>Street Name</p> 
+              <p>City</p> 
+              <p>Province</p> 
+              <p>Postal Code</p> 
+              <p>Number of Bedrooms</p>
+              <p>Number of Bathrooms</p>  
+              <button type="button" class="btn btn-primary">Delete</button>
+              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#soldModal">Sold</button>                   
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal">Edit</button>                   
+            </div>
           </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="well">
-            <h4>House 3</h4>
-            <p>10 Million</p> 
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="well">
-            <h4>House 4</h4>
-            <p>30%</p> 
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="well">
-            <h4>House 5</h4>
-            <p>30%</p> 
-        </div>
-        </div>
+          <div class="col-sm-3">
+              <div class="well">
+                <h4>House 1</h4>
+                <p>Listed Price</p> 
+                <p>Street Name</p> 
+                <p>City</p> 
+                <p>Province</p> 
+                <p>Postal Code</p> 
+                <p>Number of Bedrooms</p>
+                <p>Number of Bathrooms</p>  
+                <button type="button" class="btn btn-primary">Delete</button>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#soldModal">Sold</button>                   
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal">Edit</button>                   
+              </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="well">
+                  <h4>House 1</h4>
+                  <p>Listed Price</p> 
+                  <p>Street Name</p> 
+                  <p>City</p> 
+                  <p>Province</p> 
+                  <p>Postal Code</p> 
+                  <p>Number of Bedrooms</p>
+                  <p>Number of Bathrooms</p>  
+                  <button type="button" class="btn btn-primary">Delete</button>
+                  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#soldModal">Sold</button>                   
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal">Edit</button>                   
+                </div>
+              </div>
+              <div class="col-sm-3">
+                  <div class="well">
+                    <h4>House 1</h4>
+                    <p>Listed Price</p> 
+                    <p>Street Name</p> 
+                    <p>City</p> 
+                    <p>Province</p> 
+                    <p>Postal Code</p> 
+                    <p>Number of Bedrooms</p>
+                    <p>Number of Bathrooms</p>  
+                    <button type="button" class="btn btn-primary">Delete</button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#soldModal">Sold</button>                   
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal">Edit</button>                   
+                  </div>
+                </div>
       </div>
     </br>
     </div>
   </div>
 </div>
-
-
-<div class="modal fade" id="myModal" role="dialog">
+<!-- Create modal-->
+<div class="modal fade" id="createModal" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Update Appointment</h4>
+            <h4 class="modal-title">Create Listing</h4>
           </div>
           <div class="modal-body">
-            <label>Realtor</label>
-              <!--<input type="" class="form-control" placeholder="Name">-->
-            <select class="form-control">
-            <option>Select Realtor</option>
-            <option>Option 1</option>
-            <option>Option 2</option>
-            <option>Option 3</option>
-            <option>Option 4</option>
-            <option>Option 5</option>
-            </select>
-            <label>Time</label>
-            <input type="" class="form-control" placeholder="XX:XX">
-            <label>Location</label>
+            <label>Listed Price</label>
+            <input type="" class="form-control" placeholder="">
+            <label>Street Name</label>
+            <input type="" class="form-control" placeholder="">
+            <label>Postal Code</label>
+            <input type="" class="form-control" placeholder="">
+            <label>City</label>
             <input type="" class="form-control" placeholder="">   
+            <label>Province</label>
+            <input type="" class="form-control" placeholder=""> 
+            <label>Number of Bathrooms</label>
+            <input type="" class="form-control" placeholder="">
+            <label>Number of Bedrooms</label>
+            <input type="" class="form-control" placeholder="">
+            <label>Facilities Close By</label>
+            <input type="checkbox" value=""> PlayGround           
+            <input type="checkbox" value=""> PlayGround  
+            <br>         
+            <label>Type</label>
+            <input id="house" type="radio" name="optradio" > House
+            <input id="appart" type="radio" name="optradio"> Appartment
+            <div id="houseopt" class="hidden">
+                <label>Lot Size</label>
+                <input type="" class="form-control" placeholder="">
+                <label>House Number</label>
+                <input type="" class="form-control" placeholder="">
+            </div>
+            <div id="appartopt" class="hidden">
+                <label>Building Number</label>
+                <input type="" class="form-control" placeholder="">
+                <label>Appartment Room Number</label>
+                <input type="" class="form-control" placeholder="">
+            </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Update</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal">Create</button>
           </div>
         </div>
         
     </div>
   </div>
+
+<!--Edit Modal-->
+  <div class="modal fade" id="editModal" role="dialog">
+      <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Edit Listing</h4>
+            </div>
+            <div class="modal-body">
+              <label>Listed Price</label>
+              <input type="" class="form-control" placeholder="">
+              <label>Street Name</label>
+              <input type="" class="form-control" placeholder="">
+              <label>Postal Code</label>
+              <input type="" class="form-control" placeholder="">
+              <label>City</label>
+              <input type="" class="form-control" placeholder="">   
+              <label>Province</label>
+              <input type="" class="form-control" placeholder=""> 
+              <label>Number of Bathrooms</label>
+              <input type="" class="form-control" placeholder="">
+              <label>Number of Bedrooms</label>
+              <input type="" class="form-control" placeholder="">
+              <label>Facilities Close By</label>
+              <input type="checkbox" value=""> PlayGround           
+              <input type="checkbox" value=""> PlayGround  
+              <br>         
+              <label>Type</label>
+              <input id="house" type="radio" name="optradio" > House
+              <input id="appart" type="radio" name="optradio"> Appartment
+              <div id="houseopt" class="hidden">
+                  <label>Lot Size</label>
+                  <input type="" class="form-control" placeholder="">
+                  <label>House Number</label>
+                  <input type="" class="form-control" placeholder="">
+              </div>
+              <div id="appartopt" class="hidden">
+                  <label>Building Number</label>
+                  <input type="" class="form-control" placeholder="">
+                  <label>Appartment Room Number</label>
+                  <input type="" class="form-control" placeholder="">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+            </div>
+          </div>
+          
+      </div>
+    </div>
+    <!--Sold Modal-->
+    <div class="modal fade" id="soldModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Listing</h4>
+              </div>
+              <div class="modal-body">
+                <label>Client Phone Number</label>
+                <input type="" class="form-control" placeholder="">
+                <label>Sold Date</label>
+                <input type="" class="form-control" placeholder="">
+                <label>Completion Date</label>
+                <input type="" class="form-control" placeholder="">
+                <label>Final Price</label>
+                <input type="" class="form-control" placeholder="">   
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+              </div>
+            </div>
+            
+        </div>
+      </div>
+  <script>
+      $(document).ready(function() {
+        $('input[name="optradio"]').click(function() {
+        if($(this).attr('id') == 'house')
+          {
+            $("#houseopt").removeClass('hidden');
+            $("#appartopt").addClass('hidden');
+
+          }
+        else if($(this).attr('id') == 'appart')
+          {
+            $("#appartopt").removeClass('hidden');
+            $("#houseopt").addClass('hidden');
+
+          }
+        });
+        });
+      </script>
 
 </body>
 </html>
