@@ -62,7 +62,8 @@
      <thead>
         <tr>
           <th>Realtor Name</th>
-          <th>Time</th>
+          <th>Start Time</th>
+          <th>End Time</th>
           <th>Location</th>
           <th></th>
         </tr>
@@ -71,6 +72,7 @@
         <tr>
           <td>Charnvir</td>
           <td>15:00</td>
+          <td>17:00:00</td>
           <td>UBC</td>
           <td>
             <button type="button" class="btn btn-danger">Delete</button>
@@ -80,6 +82,7 @@
         <tr>
           <td>Sean</td>
           <td>17:00</td>
+          <td>19:00</td>
           <td>UBC</td>
           <td>
             <button type="button" class="btn btn-danger">Delete</button>
@@ -112,15 +115,19 @@
           <option>Option 5</option>
           </select>
       </div>
-      <div class="form-group col-md-3">
-        <label>Time</label>
+      <div class="form-group col-md-2">
+        <label>Start Time</label>
         <input type="" class="form-control" placeholder="XX:XX">
       </div>
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-2">
+          <label>End Time</label>
+          <input type="" class="form-control" placeholder="XX:XX">
+        </div>
+      <div class="form-group col-md-2">
         <label>Location</label>
         <input type="" class="form-control" placeholder="">
       </div>
-      <div id="createApptButton" class="form-group col-md-3">
+      <div id="createApptButton" class="form-group col-md-2">
         <button type="button" class="btn btn-success">Create</button>
       </div>
     </div>
@@ -144,7 +151,9 @@
             <option>Option 4</option>
             <option>Option 5</option>
             </select>
-            <label>Time</label>
+            <label>Start Time</label>
+            <input type="" class="form-control" placeholder="XX:XX">
+            <label>End Time</label>
             <input type="" class="form-control" placeholder="XX:XX">
             <label>Location</label>
             <input type="" class="form-control" placeholder="">   
