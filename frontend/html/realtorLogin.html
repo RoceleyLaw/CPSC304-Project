@@ -30,7 +30,7 @@
     
                     <div class="form-group form-group-lg">
                         <div class="col-sm-4 col-sm-offset-8">
-                            <button type="submit" class="bbtn btn-primary btn-lg">Login</button>
+                            <button type="reset" onclick="check()" class="bbtn btn-primary btn-lg">Login</button>
                         </div>
                     </div>
     
@@ -39,20 +39,21 @@
 
 <!--TODO: MAKE IT CHECK WITH DATABASE INSTEAD OF HARD CODING-->
 <script>
-  function check() {
-	 var name = document.getElementById("usr").value;
-	 var password = document.getElementById("pwd").value;
-
-	 if(name =="bag1" &&  password == "9460"){
-		  window.alert("successful");
-
-	 }
-	 else {
-      window.alert("Incorrect User Name or Password. Please Try Again.");
-      document.getElementById('errorMessage').innerHTML="** Incorrect User Name or Password. Please Try Again." ;
-	 }
-  }
-</script>
+    function check() {
+       var name = document.getElementById("usr").value;
+       var password = document.getElementById("pwd").value;
+  
+       if(name =="bag1" &&  password == "9460"){
+            console.log("HI"); 
+            window.location.assign('./listings.html');
+  
+       }
+       else {
+        window.alert("Incorrect User Name or Password. Please Try Again.");
+        document.getElementById('errorMessage').innerHTML="** Incorrect User Name or Password. Please Try Again." ;
+       }
+    }
+  </script>
 
 </body>
 </html>
