@@ -3,11 +3,11 @@
 var ROUTE_URL = "https://evening-fjord-94245.herokuapp.com/allpersons";
 
 var postData = {
-    PersonID : 100, 
-    LastName : "Smith", 
-    FirstName : "Joe", 
-    DetailAddress : "sj@gmail.com",
-    City : "Vancouver"
+    PersonID : 50, 
+    LastName : "Sam", 
+    FirstName : "Will", 
+    DetailAddress : "ws@gmail.com",
+    City : "Burnaby"
 }
 
 var ajaxGet = function(url, onSuccess, onError){
@@ -79,7 +79,8 @@ window.onload = function() {
         }); 
 
 
-    ajaxPost("http://httpbin.org/post", 
+    //"http://httpbin.org/post"
+    ajaxPost("https://evening-fjord-94245.herokuapp.com/new", 
             function(returnObject){
                 console.log(returnObject);
             }, 
