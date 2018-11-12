@@ -181,8 +181,8 @@ function renderListings(container, instance, listName){
 
     var buttonEdit= document.createElement("BUTTON");
     buttonEdit.setAttribute("class", "btn btn-primary");
-    buttonSold.setAttribute("data-toggle", "modal");
-    buttonSold.setAttribute("data-target","#editModal");
+    buttonEdit.setAttribute("data-toggle", "modal");
+    buttonEdit.setAttribute("data-target","#editModal");
     var buttonEditText = document.createTextNode("Edit");
     buttonEdit.appendChild(buttonEditText);
 
