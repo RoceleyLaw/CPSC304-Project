@@ -1,36 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>SmartPAC</title>
+  <title>Home Hunter</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    .navbar-inverse{
+        background-color: green;
+    } 
+    #header{
+        color: white;
+    }
+    .container{
+        margin-top:100px;
+        width: 60%;
+        border: 3px solid #73AD21;
+        padding: 10px;
+        text-align: center;
+    }
+  </style>
 </head>
 <body>
-  
-        <div id="register-page" class="container-fluid">
+        <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a href="../index.html" id="header" class="navbar-brand">Home Hunter</a>
+                    </div>
+                </div>
+            </nav>
+        <div id="register-page" class="container">
                 <form class="form-horizontal" role="form">
                     <h2 style="padding-left: 0;">Realtor Login</h2>
                     <div>
                         <div class="form-group form-group-lg">
-                            <label class="col-sm-2 control-label" for="lg">Realtor License Number</label>
-                            <div class="col-sm-4">
-                                <input class="form-control" type="text" id="usr" placeholder="xxxx" required="true">
-                            </div>
+                                <label class="col-sm-4 control-label" for="lg">License Number</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" type="text" id="usr" placeholder="License Number" required="true">
+                                </div>
                         </div>
                         <div class="form-group form-group-lg">
-                                <label class="col-sm-2 control-label" for="lg">Password</label>
+                                <label class="col-sm-4 control-label" for="lg">Password</label>
                                 <div class="col-sm-4">
                                     <input class="form-control" type="text" id="pwd" placeholder="password" required="true">
                                 </div>
-                            </div>
-                
-    
+                        </div>
                     <div class="form-group form-group-lg">
                         <div class="col-sm-4 col-sm-offset-8">
-                            <button type="reset" onclick="check()" class="bbtn btn-primary btn-lg">Login</button>
+                            <button type="reset" onclick="check()" class="bbtn btn-success btn-lg">Login</button>
                         </div>
                     </div>
     
@@ -39,21 +58,24 @@
 
 <!--TODO: MAKE IT CHECK WITH DATABASE INSTEAD OF HARD CODING-->
 <script>
-    function check() {
-       var name = document.getElementById("usr").value;
-       var password = document.getElementById("pwd").value;
-  
-       if(name =="bag1" &&  password == "9460"){
-            console.log("HI"); 
-            window.location.assign('./realtorlistings.html');
-  
-       }
-       else {
-        window.alert("Incorrect User Name or Password. Please Try Again.");
-        document.getElementById('errorMessage').innerHTML="** Incorrect User Name or Password. Please Try Again." ;
-       }
-    }
-  </script>
+  function check() {
+     console.log("HELOOOOO"); 
+	 var name = document.getElementById("usr").value;
+	 var password = document.getElementById("pwd").value;
+
+	 if(name =="bag1" &&  password == "9460"){
+          //window.alert("successful");
+          console.log("HI"); 
+          //window.open("./listings.html");
+          window.location.assign('./realtorlistings.html');
+
+	 }
+	 else {
+      window.alert("Incorrect User Name or Password. Please Try Again.");
+      document.getElementById('errorMessage').innerHTML="** Incorrect User Name or Password. Please Try Again." ;
+	 }
+  }
+</script>
 
 </body>
 </html>

@@ -6,6 +6,21 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <style>
+                .navbar-inverse{
+                background-color: green;
+                } 
+                /* On small screens, set height to 'auto' for the grid */
+                @media screen and (max-width: 767px) {
+                .row.content {height: auto;} 
+                }
+                #header{
+                 color: white;
+                }
+                #menuHeaders{
+                color: white;
+                 }
+            </style>
 </head>
 <body>
     <div id="header"></div>
@@ -15,7 +30,13 @@
          http://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_input_height&stacked=h
          http://www.w3schools.com/bootstrap/bootstrap_forms_inputs.asp
     -->
-
+    <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="../index.html" id="header" class="navbar-brand">Home Hunter</a>
+                    </div>
+            </div>
+    </nav>
     <div>
         <div id="register-page" class="container-fluid">
             <form class="form-horizontal" role="form">
@@ -49,7 +70,7 @@
 
                 <div class="form-group form-group-lg">
                     <div class="col-sm-4 col-sm-offset-8">
-                        <button type="submit" class="bbtn btn-primary btn-lg">Register</button>
+                        <button type="submit" class="bbtn btn-success btn-lg">Register</button>
                     </div>
                 </div>
 
