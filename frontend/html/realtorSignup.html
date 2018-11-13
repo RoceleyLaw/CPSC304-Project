@@ -45,44 +45,57 @@
                     <div class="form-group form-group-lg">
                         <label class="col-sm-2 control-label" for="lg">Name</label>
                         <div class="col-sm-4">
-                            <input class="form-control" type="text" id="lg" placeholder="Name" required="true">
+                            <input id="inputName" class="form-control" type="" id="lg" placeholder="Name" required="true">
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
                         <label class="col-sm-2 control-label" for="lg">Phone Number</label>
                         <div class="col-sm-4">
-                            <input class="form-control" type="text" id="lg" placeholder="(xxx)-xxx-xxxx" required="true">
+                            <input id="inputPhoneNumber" class="form-control" type="" id="lg" placeholder="(xxx)-xxx-xxxx" required="true">
                         </div>
                     </div>
+                    
                     <div class="form-group form-group-lg">
                         <label class="col-sm-2 control-label" for="lg">Realtor License Number</label>
                         <div class="col-sm-4">
-                            <input class="form-control" type="text" id="lg" placeholder="xxxx" required="true">
+                            <input id="inputRealtorLicenseNumber" class="form-control" type="" id="lg" placeholder="xxxx" required="true">
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
                         <label class="col-sm-2 control-label" for="lg">Email</label>
                         <div class="col-sm-4">
-                            <input class="form-control" type="text" id="lg" placeholder="example@example.ca" required="true">
+                            <input id="inputEmail" class="form-control" type="" id="lg" placeholder="example@example.ca" required="true">
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
                         <label class="col-sm-2 control-label" for="lg">Password</label>
                         <div class="col-sm-4">
-                            <input class="form-control" type="text" id="lg" placeholder="Password" required="true">
+                            <input id="inputPassword" class="form-control" type="password" id="lg" placeholder="Password" required="true">
                         </div>
                     </div>
 
                 <div class="form-group form-group-lg">
                     <div class="col-sm-4 col-sm-offset-8">
-                        <button type="submit" class="bbtn btn-success btn-lg">Register</button>
+                        <button type="submit" class="bbtn btn-success btn-lg" onclick="createNewRealtorAccount();">Register</button>
                     </div>
                 </div>
 
             </form>
         </div>
-        <!--End of Form-->
-
-        <div id="footer"></div>
+        <script>
+            function createNewRealtorAccount(){
+                console.log("hello");
+                var obj = new Object();
+                obj.name = document.getElementById("inputName").value;
+                obj.phoneNumber = document.getElementById("inputPhoneNumber").value;
+                obj.realtorLicenseNumber = document.getElementById("inputRealtorLicenseNumber").value;
+                obj.email = document.getElementById("inputEmail").value;
+                obj.password = document.getElementById("inputPassword").value;
+                
+                var newJSON = JSON.stringify(obj);
+                console.log(newJSON);
+            }
+        </script>
+      
 </body>
 </html>
