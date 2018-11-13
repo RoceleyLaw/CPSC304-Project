@@ -1,5 +1,7 @@
-//testing request
+//GLOBAL VARIABLES 
+var CLIENT_PHONE_NUMBER; 
 
+//testing request
 var ROUTE_URL = "https://evening-fjord-94245.herokuapp.com";
 var ALL_PERSONS = "/allpersons"; 
 var ALL_POSTS = "/allposts"; 
@@ -180,8 +182,23 @@ window.onload = function() {
 
     var url_string = window.location.href
     var url = new URL(url_string);
-    var c = url.searchParams.get("id");
-    console.log(c); 
+    var CLIENT_PHONE_NUMBER = url.searchParams.get("id");
+    console.log("Client phone number: " + CLIENT_PHONE_NUMBER); 
+
+    //listings
+    var url1 = "./listings.html?id=" + CLIENT_PHONE_NUMBER; 
+    var element1 = document.getElementById('menuHeaders1');
+    element1.setAttribute("href",url1)
+
+    //appointments 
+    var url2 = "./appointments.html?id=" + CLIENT_PHONE_NUMBER; 
+    var element2 = document.getElementById('menuHeaders2');
+    element2.setAttribute("href",url2);
+
+    //clientSettings
+    var url3 = "./clientSettings.html?id=" + CLIENT_PHONE_NUMBER; 
+    var element3 = document.getElementById('menuHeaders3');
+    element3.setAttribute("href",url3);
 
     ajaxGet(ROUTE_URL + ALL_POSTS + "/59727", 
         function(testObject){
