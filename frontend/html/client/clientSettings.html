@@ -31,71 +31,59 @@
          http://www.w3schools.com/bootstrap/bootstrap_forms_inputs.asp
     -->
     <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a href="../index.html" id="header" class="navbar-brand">Home Hunter</a>
-                    </div>
-            </div>
-    </nav>
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a id="header" class="navbar-brand">Home Hunter</a>
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a id="menuHeaders" href="./listings.html"></span>Listings</a></li>
+            <li><a id="menuHeaders" href="./appointments.html"></span>Appointments</a></li>
+            <li><a id="menuHeaders" href="./clientSettings.html"></span>Settings</a></li>
+            <li><a id="menuHeaders" href="../../index.html"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+          </ul>
+        </div>
+      </nav>
     <div>
         <div id="register-page" class="container-fluid">
             <form class="form-horizontal" role="form">
-                <h2 style="padding-left: 0;">Register As Realtor</h2>
+                <h2 style="padding-left: 0;">Settings</h2>
                 <div>
                     <div class="form-group form-group-lg">
                         <label class="col-sm-2 control-label" for="lg">Name</label>
                         <div class="col-sm-4">
-                            <input id="inputName" class="form-control" type="" id="lg" placeholder="Name" required="true">
+                            <input class="form-control" type="text" id="lg1" placeholder="Name" required="true">
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
                         <label class="col-sm-2 control-label" for="lg">Phone Number</label>
                         <div class="col-sm-4">
-                            <input id="inputPhoneNumber" class="form-control" type="" id="lg" placeholder="(xxx)-xxx-xxxx" required="true">
+                            <input class="form-control" type="text" id="lg2" placeholder="(xxx)-xxx-xxxx" required="true">
                         </div>
                     </div>
-                    
-                    <div class="form-group form-group-lg">
-                        <label class="col-sm-2 control-label" for="lg">Realtor License Number</label>
-                        <div class="col-sm-4">
-                            <input id="inputRealtorLicenseNumber" class="form-control" type="" id="lg" placeholder="xxxx" required="true">
-                        </div>
-                    </div>
+
                     <div class="form-group form-group-lg">
                         <label class="col-sm-2 control-label" for="lg">Email</label>
                         <div class="col-sm-4">
-                            <input id="inputEmail" class="form-control" type="" id="lg" placeholder="example@example.ca" required="true">
+                            <input class="form-control" type="text" id="lg3" placeholder="example@example.ca" required="true">
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
                         <label class="col-sm-2 control-label" for="lg">Password</label>
                         <div class="col-sm-4">
-                            <input id="inputPassword" class="form-control" type="password" id="lg" placeholder="Password" required="true">
+                            <input class="form-control" type="password" id="lg4" placeholder="Password" required="true">
                         </div>
                     </div>
 
                 <div class="form-group form-group-lg">
                     <div class="col-sm-4 col-sm-offset-8">
-                        <button type="submit" class="bbtn btn-success btn-lg" onclick="createNewRealtorAccount();">Register</button>
+                        <button type="submit" class="bbtn btn-primary btn-lg">Save</button>
                     </div>
                 </div>
 
             </form>
         </div>
-        <script>
-            function createNewRealtorAccount(){
-                console.log("hello");
-                var obj = new Object();
-                obj.name = document.getElementById("inputName").value;
-                obj.phoneNumber = document.getElementById("inputPhoneNumber").value;
-                obj.realtorLicenseNumber = document.getElementById("inputRealtorLicenseNumber").value;
-                obj.email = document.getElementById("inputEmail").value;
-                obj.password = document.getElementById("inputPassword").value;
-                
-                var newJSON = JSON.stringify(obj);
-                console.log(newJSON);
-            }
-        </script>
-      
+        <!--End of Form-->
+
+        <div id="footer"></div>
 </body>
 </html>

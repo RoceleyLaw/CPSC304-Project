@@ -27,7 +27,7 @@
         <nav class="navbar navbar-inverse">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <a href="../index.html" id="header" class="navbar-brand">Home Hunter</a>
+                        <a href="../../index.html" id="header" class="navbar-brand">Home Hunter</a>
                         </div>
                 </div>
             </nav>
@@ -69,7 +69,8 @@
           //window.alert("successful");
           console.log("HI"); 
           //window.open("./listings.html");
-          window.location.assign('./listings.html');
+          var path = "./listings.html?id=" + name; 
+          window.location.assign(path);
 
 	 }
 	 else {
