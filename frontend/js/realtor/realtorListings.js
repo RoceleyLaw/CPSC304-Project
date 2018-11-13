@@ -129,7 +129,7 @@ var ajaxDelete = function(url, onSuccess, onError) {
         }
     }
 
-    xhttp.send(JSON.stringify(deleteData)); 
+    xhttp.send(null); 
 }
 
 ajaxGet("https://evening-fjord-94245.herokuapp.com/allposts", function(success){
@@ -146,6 +146,7 @@ function renderListings(container, instance, listName){
 
     var div1 = document.createElement(container);
     div1.setAttribute("class","col-sm-3");
+    div1.setAttribute("id", instance.details[listName].listingID)
 
     var div2 =document.createElement("DIV");
     div2.setAttribute("class","well");
@@ -168,7 +169,9 @@ function renderListings(container, instance, listName){
     var nBathroomsText = document.createTextNode("NO. OF BATHROOMS: "+ instance.details[listName].bathroom);
 
     var buttonDelete= document.createElement("BUTTON");
+    var ids = instance.details[listName].listingID;
     buttonDelete.setAttribute("class", "btn btn-primary")
+    buttonDelete.setAttribute("onclick", "deleteListings(" + ids + ")");
     var buttonDeleteText = document.createTextNode("Delete");
     buttonDelete.appendChild(buttonDeleteText);
 
@@ -244,7 +247,7 @@ function createNewListings(){
     function(returnObject){
         console.log("POST SUCCESS"); 
         console.log(returnObject);
-        var divRem = document.getElementById("list");
+       // var divRem = document.getElementById("list");
         ajaxGet(ROUTE_URL + ALL_POSTS , 
         function(testObject){
             console.log("GET SUCCESS"); 
@@ -260,9 +263,38 @@ function createNewListings(){
     function(error){
         console.log("POST ERROR"); 
         console.log(error); 
-    }, newJSON);
+    }, newJSON); 
+}
+// $('.btn btn-primary').on('click', function(){
+//     var parent_id = $(this).parent().parent().attr('id');
+//     console.log(parent_id);
+//    })
 
-    
+function deleteListings(id){
+    var obj = new Object()
+    obj.listingID = id;
+    var delJSON = JSON.stringify(obj);
+    console.log(delJSON);
+    ajaxDelete("https://evening-fjord-94245.herokuapp.com/allposts/" + id,     function(returnObject){
+        console.log("DELETE SUCCESS"); 
+        console.log(returnObject);
+       // var divRem = document.getElementById("list");
+        ajaxGet(ROUTE_URL + ALL_POSTS , 
+        function(testObject){
+            console.log("GET SUCCESS"); 
+            console.log(testObject);
+            document.location.reload();
+            renderListingsAll(document.getElementById("list"),listings);
+        },
+        function(error){
+            console.log("GET ERROR"); 
+            console.log(error);
+        }); 
+    }, 
+    function(error){
+        console.log("POST ERROR"); 
+        console.log(error); 
+    }, delJSON);
 }
 
 
