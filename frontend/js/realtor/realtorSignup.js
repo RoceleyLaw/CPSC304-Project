@@ -30,20 +30,19 @@ var ajaxPost = function(url, onSuccess, onError, jsonString){
 function createNewRealtorAccount(){
     console.log("hello");
     var obj = new Object();
-    obj.name = document.getElementById("inputName").value;
+    obj.realtorName = document.getElementById("inputName").value;
     obj.phoneNumber = document.getElementById("inputPhoneNumber").value;
-    obj.realtorLicenseNumber = document.getElementById("inputRealtorLicenseNumber").value;
-    obj.email = document.getElementById("inputEmail").value;
-    obj.password = document.getElementById("inputPassword").value;
+    obj.licenseNumber = document.getElementById("inputRealtorLicenseNumber").value;
+    obj.realtorEmail = document.getElementById("inputEmail").value;
+    //obj.password = document.getElementById("inputPassword").value;
                 
     var newJSON = JSON.stringify(obj);
-    console.log("dummy");
-    dummy();
+    console.log(newJSON);
 
     ajaxPost("https://evening-fjord-94245.herokuapp.com/allRealtors", 
     function(){
         console.log("POST Success"); 
-        window.location.assign("../../index.html");
+       window.location.assign("../../index.html");
     }, 
     function(error){
         console.log("POST ERROR"); 
