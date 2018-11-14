@@ -67,7 +67,8 @@
           //window.alert("successful");
           console.log("HI"); 
           //window.open("./listings.html");
-          window.location.assign('./realtorlistings.html');
+          var path = "./realtorlistings.html?id=" + name; 
+          window.location.assign(path);
 
 	 }
 	 else {
