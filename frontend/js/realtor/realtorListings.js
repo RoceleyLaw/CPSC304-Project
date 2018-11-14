@@ -96,7 +96,7 @@ var ajaxPost = function(url, onSuccess, onError, jsonString){
     xhttp.send(jsonString); 
 }
 
-var ajaxPut = function(url, onSuccess, onError){
+var ajaxPut = function(url, onSuccess, onError, putJSON){
     var xhttp = new XMLHttpRequest(); 
     xhttp.open("PUT", url, true); 
 
@@ -111,7 +111,7 @@ var ajaxPut = function(url, onSuccess, onError){
         }
     }
 
-    xhttp.send(JSON.stringify(putData)); 
+    xhttp.send(JSON.stringify(putJSON)); 
 }
 
 var ajaxDelete = function(url, onSuccess, onError) {
@@ -161,15 +161,16 @@ function renderListings(container, instance, listName){
     var nBathrooms = document.createElement("p");
     var h4XText = document.createTextNode("ID: "+ instance.details[listName].listingID);
     var pXText = document.createTextNode("PRICE: $" + instance.details[listName].listedPrice);
-    var streetNameText = document.createTextNode("ADDRESS: "+"--------");
-    var cityText = document.createTextNode("CITY: "+"--------");
-    var provinceText = document.createTextNode("PROVINCE: "+"--------");
+    var streetNameText = document.createTextNode("ADDRESS: "+ instance.details[listName].streetName);
+    var cityText = document.createTextNode("CITY: "+ instance.details[listName].city);
+    var provinceText = document.createTextNode("PROVINCE: "+ instance.details[listName].province);
     var postalCodeText = document.createTextNode("POSTAL CODE: "+ instance.details[listName].postalCode);
     var nBedroomsText = document.createTextNode("NO. OF BEDROOMS: "+ instance.details[listName].bedroom);
     var nBathroomsText = document.createTextNode("NO. OF BATHROOMS: "+ instance.details[listName].bathroom);
 
-    var buttonDelete= document.createElement("BUTTON");
     var ids = instance.details[listName].listingID;
+
+    var buttonDelete= document.createElement("BUTTON");
     buttonDelete.setAttribute("class", "btn btn-primary")
     buttonDelete.setAttribute("onclick", "deleteListings(" + ids + ")");
     var buttonDeleteText = document.createTextNode("Delete");
@@ -177,6 +178,7 @@ function renderListings(container, instance, listName){
 
     var buttonSold= document.createElement("BUTTON");
     buttonSold.setAttribute("class", "btn btn-danger");
+
     buttonSold.setAttribute("data-toggle", "modal");
     buttonSold.setAttribute("data-target","#soldModal");
     var buttonSoldText = document.createTextNode("Sold");
@@ -184,6 +186,7 @@ function renderListings(container, instance, listName){
 
     var buttonEdit= document.createElement("BUTTON");
     buttonEdit.setAttribute("class", "btn btn-primary");
+    buttonEdit.setAttribute("onclick", "editListingsGet(" + ids + ")");
     buttonEdit.setAttribute("data-toggle", "modal");
     buttonEdit.setAttribute("data-target","#editModal");
     var buttonEditText = document.createTextNode("Edit");
@@ -251,7 +254,7 @@ function createNewListings(){
         ajaxGet(ROUTE_URL + ALL_POSTS , 
         function(testObject){
             console.log("GET SUCCESS"); 
-            console.log(testObject);
+            // console.log(testObject);
             document.location.reload();
             renderListingsAll(document.getElementById("list"),listings);
         },
@@ -265,17 +268,14 @@ function createNewListings(){
         console.log(error); 
     }, newJSON); 
 }
-// $('.btn btn-primary').on('click', function(){
-//     var parent_id = $(this).parent().parent().attr('id');
-//     console.log(parent_id);
-//    })
+
 
 function deleteListings(id){
     var obj = new Object()
     obj.listingID = id;
     var delJSON = JSON.stringify(obj);
     console.log(delJSON);
-    ajaxDelete("https://evening-fjord-94245.herokuapp.com/allposts/" + id,     function(returnObject){
+    ajaxDelete("https://evening-fjord-94245.herokuapp.com/allposts/" + id, function(returnObject){
         console.log("DELETE SUCCESS"); 
         console.log(returnObject);
        // var divRem = document.getElementById("list");
@@ -295,6 +295,67 @@ function deleteListings(id){
         console.log("POST ERROR"); 
         console.log(error); 
     }, delJSON);
+}
+
+function getParentNode(){
+    console.log()
+}
+
+var globalID, globalistedPrice,globalstreetname, globalpostalCode, globalcity, globalprovince, globalbathroom,globalbedroom;
+
+function editListingsGet(id){
+    console.log(id);
+    var getInfo ;
+    ajaxGet(ROUTE_URL + ALL_POSTS + '/' + id, 
+        function(testObject){
+            getInfo = testObject;
+            document.getElementById("editListedPrice").value = getInfo[0].listedPrice;
+            document.getElementById("editStreetName").value = getInfo[0].streetName;
+            document.getElementById("editPostalCode").value = getInfo[0].postalCode;
+            document.getElementById("editCity").value = getInfo[0].city;
+            document.getElementById("editProvince").value = getInfo[0].province;
+            document.getElementById("editBathrooms").value = getInfo[0].bathroom;
+            document.getElementById("editBedrooms").value = getInfo[0].bedroom;
+            globalID = id; 
+            globalistedPrice = document.getElementById("editListedPrice").value;
+            globalstreetname =  document.getElementById("editStreetName").value;
+            globalpostalCode = document.getElementById("editPostalCode").value;
+            globalcity =  document.getElementById("editCity").value;
+            globalprovince = document.getElementById("editProvince").value;
+            globalbathroom = document.getElementById("editBathrooms").value
+            globalbedroom = document.getElementById("editBedrooms").value
+            console.log(getInfo[0]);
+        },
+        function(error){
+            console.log("GET ERROR"); 
+            console.log(error);
+        });
+    }
+
+function editListingsUpdate(){
+        var obj = new Object();
+        obj.listedPrice = document.getElementById("editListedPrice").value;
+        obj.streetName = document.getElementById("editStreetName").value;
+        obj.postalCode = document.getElementById("editPostalCode").value;
+        obj.city = document.getElementById("editCity").value;
+        obj.province = document.getElementById("editProvince").value;
+        obj.bathroom = document.getElementById("editBathrooms").value;
+        obj.bedroom = document.getElementById("editBedrooms").value;
+        //var randomID = Math.floor((Math.random() * 10000000) + 10000);
+        obj.listingID = globalID;
+        obj.licenseNumber = "5770319"; //Hardcoded for now
+        obj.pictureURL = "http://dummyimage.com/165x107.jpg/5fa2dd/ffffff";
+        console.log(newJSON);
+        ajaxPut("https://evening-fjord-94245.herokuapp.com/allposts/"  + globalID,function(success){
+            console.log("UPDATED");
+            console.log(newJSON);
+            console.log(success); 
+            document.location.reload();
+            renderListingsAll(document.getElementById("list"),listings);
+        },
+        function(error){
+            console.log("UPDATE FAILED")
+        }, obj);
 }
 
 
