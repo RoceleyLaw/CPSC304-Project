@@ -1,8 +1,9 @@
 //GLOBAL VARIABLES 
-var CLIENT_PHONE_NUMBER; 
+var REALTOR_NUMBER;
 var ROUTE_URL = "https://evening-fjord-94245.herokuapp.com";
-var GET = "/allClients/"; 
-var PUT ="/allClients/:phoneNumber?";
+var GET = "/allRealtors/"; 
+var PUT ="/allRealtors/:phoneNumber?";
+var accountInfo ={};
 var ajaxGet = function(url, onSuccess, onError){
     var xhttp = new XMLHttpRequest();
     xhttp.timeout = 3000; // timeout set to 2 seconds 
@@ -41,6 +42,7 @@ var ajaxGet = function(url, onSuccess, onError){
     xhttp.open("GET", url, true);
     xhttp.send();
 }
+
 var ajaxPut = function(url, onSuccess, onError,jsonString){
     var xhttp = new XMLHttpRequest(); 
     xhttp.open("PUT", url, true); 
@@ -59,17 +61,19 @@ var ajaxPut = function(url, onSuccess, onError,jsonString){
     xhttp.send(jsonString); 
 }
 
-function updateClientInformation(){
+function updateInformation(){
     console.log("hello");
     var obj = new Object();
-    obj.clientName = document.getElementById("lg1").value;
+    obj.realtorName = document.getElementById("lg1").value;
+    console.log(obj.realtorName);
     obj.phoneNumber = document.getElementById("lg2").value;
-    obj.clientEmail = document.getElementById("lg3").value;
+    obj.licenseNumber = document.getElementById("lg3").value;
+    obj.realtorEmail = document.getElementById("lg4").value;
     //obj.password = document.getElementById("inputPassword").value;
                 
     var newJSON = JSON.stringify(obj);
     console.log(newJSON);
-    ajaxPut("https://evening-fjord-94245.herokuapp.com/allClients/" + CLIENT_PHONE_NUMBER, function(){
+    ajaxPut("https://evening-fjord-94245.herokuapp.com/allRealtors/" + REALTOR_NUMBER, function(){
         console.log("POST Success"); 
         location.reload();
     }, 
@@ -80,35 +84,42 @@ function updateClientInformation(){
 }
 
 window.onload = function() {
-    console.log('Hello')
+    console.log('Realtor Settings');
 
+    //GET REALTOR NUMBER
     var url_string = window.location.href
     var url = new URL(url_string);
-    CLIENT_PHONE_NUMBER = url.searchParams.get("id");
-    console.log("Client phone number: " + CLIENT_PHONE_NUMBER); 
+    REALTOR_NUMBER = url.searchParams.get("id");
+    console.log("Client phone number: " + REALTOR_NUMBER); 
 
-    //listings
-    var url1 = "./listings.html?id=" + CLIENT_PHONE_NUMBER; 
+    //realtorListings
+    var url1 = "./realtorListings.html?id=" + REALTOR_NUMBER; 
     var element1 = document.getElementById('menuHeaders1');
     element1.setAttribute("href",url1)
 
-    //appointments 
-    var url2 = "./appointments.html?id=" + CLIENT_PHONE_NUMBER; 
+    //soldListings 
+    var url2 = "./soldListings.html?id=" + REALTOR_NUMBER; 
     var element2 = document.getElementById('menuHeaders2');
     element2.setAttribute("href",url2);
 
-    //clientSettings
-    var url3 = "./clientSettings.html?id=" + CLIENT_PHONE_NUMBER; 
+    //realtorAppointments 
+    var url3 = "./realtorAppointments.html?id=" + REALTOR_NUMBER; 
     var element3 = document.getElementById('menuHeaders3');
     element3.setAttribute("href",url3);
 
-    ajaxGet(ROUTE_URL + GET + CLIENT_PHONE_NUMBER, 
+    //realorSettings
+    var url4 = "./realtorSettings.html?id=" + REALTOR_NUMBER; 
+    var element4 = document.getElementById('menuHeaders4');
+    element4.setAttribute("href",url4);
+    
+    ajaxGet(ROUTE_URL + GET + REALTOR_NUMBER, 
         function(testObject){
             console.log("GET SUCCESS");            
-            console.log(testObject);
-            document.getElementById("lg1").value=testObject[0].clientName;
+            console.log(testObject[0].realtorName);
+            document.getElementById("lg1").value=testObject[0].realtorName;
             document.getElementById("lg2").value=testObject[0].phoneNumber;
-            document.getElementById("lg3").value=testObject[0].clientEmail;
+            document.getElementById("lg3").value=testObject[0].licenseNumber;
+            document.getElementById("lg4").value=testObject[0].realtorEmail;
             
         },
         function(error){
@@ -116,3 +127,4 @@ window.onload = function() {
             console.log(error);
         }); 
 }
+

@@ -6,6 +6,8 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../../js/client/clientSignup.js"></script>
+
         <style>
                 .navbar-inverse{
                 background-color: green;
@@ -45,32 +47,32 @@
                     <div class="form-group form-group-lg">
                         <label class="col-sm-2 control-label" for="lg">Name</label>
                         <div class="col-sm-4">
-                            <input class="form-control" type="text" id="lg" placeholder="Name" required="true">
+                            <input class="form-control" type="text" id="clientInputName" placeholder="Name" required="true">
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
                         <label class="col-sm-2 control-label" for="lg">Phone Number</label>
                         <div class="col-sm-4">
-                            <input class="form-control" type="text" id="lg" placeholder="(xxx)-xxx-xxxx" required="true">
+                            <input class="form-control" type="text" id="clientInputPhoneNumber" placeholder="(xxx)-xxx-xxxx" required="true">
                         </div>
                     </div>
 
                     <div class="form-group form-group-lg">
                         <label class="col-sm-2 control-label" for="lg">Email</label>
                         <div class="col-sm-4">
-                            <input class="form-control" type="text" id="lg" placeholder="example@example.ca" required="true">
+                            <input class="form-control" type="text" id="clientInputEmail" placeholder="example@example.ca" required="true">
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
                         <label class="col-sm-2 control-label" for="lg">Password</label>
                         <div class="col-sm-4">
-                            <input class="form-control" type="password" id="lg" placeholder="Password" required="true">
+                            <input class="form-control" type="password" id="clientInputPassword" placeholder="Password" required="true">
                         </div>
                     </div>
 
                 <div class="form-group form-group-lg">
                     <div class="col-sm-4 col-sm-offset-8">
-                        <button type="submit" class="bbtn btn-success btn-lg">Register</button>
+                        <button type="reset" class="bbtn btn-success btn-lg" onclick="createNewClientAccount();">Register</button>
                     </div>
                 </div>
 

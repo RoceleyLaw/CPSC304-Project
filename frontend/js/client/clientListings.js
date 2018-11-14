@@ -182,7 +182,7 @@ window.onload = function() {
 
     var url_string = window.location.href
     var url = new URL(url_string);
-    var CLIENT_PHONE_NUMBER = url.searchParams.get("id");
+    CLIENT_PHONE_NUMBER = url.searchParams.get("id");
     console.log("Client phone number: " + CLIENT_PHONE_NUMBER); 
 
     //listings

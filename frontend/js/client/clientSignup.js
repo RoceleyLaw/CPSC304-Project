@@ -1,9 +1,5 @@
-
 var ROUTE_URL = "https://evening-fjord-94245.herokuapp.com";
-var POSTS = "/allRealtors"; 
-var dummy= function(){
-    console.log("dummy");
-}
+var POSTS = "/allClients"; 
 
 var ajaxPost = function(url, onSuccess, onError, jsonString){
     console.log("in ajax");
@@ -27,22 +23,21 @@ var ajaxPost = function(url, onSuccess, onError, jsonString){
     xhttp.send(jsonString); 
 }
 
-function createNewRealtorAccount(){
+function createNewClientAccount(){
     console.log("hello");
     var obj = new Object();
-    obj.realtorName = document.getElementById("inputName").value;
-    obj.phoneNumber = document.getElementById("inputPhoneNumber").value;
-    obj.licenseNumber = document.getElementById("inputRealtorLicenseNumber").value;
-    obj.realtorEmail = document.getElementById("inputEmail").value;
+    obj.clientName = document.getElementById("clientInputName").value;
+    obj.phoneNumber = document.getElementById("clientInputPhoneNumber").value;
+    obj.clientEmail = document.getElementById("clientInputEmail").value;
     //obj.password = document.getElementById("inputPassword").value;
                 
     var newJSON = JSON.stringify(obj);
     console.log(newJSON);
-
-    if (obj.licenseNumber == ""){
-     alert('Please Enter Realtor License Number');
+    console.log(obj.phoneNumber);
+    if (obj.phoneNumber == ""){
+     alert('Please Enter Phone Number');
     }
-    else {   ajaxPost("https://evening-fjord-94245.herokuapp.com/allRealtors", 
+    else {   ajaxPost("https://evening-fjord-94245.herokuapp.com/allClients", 
         function(){
             console.log("POST Success"); 
             window.location.assign("../../index.html");

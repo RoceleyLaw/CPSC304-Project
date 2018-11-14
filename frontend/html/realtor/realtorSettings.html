@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../../js/realtor/realtorSettings.js"></script>
         <style>
             .navbar-inverse{
             background-color: green;
@@ -17,9 +18,21 @@
             #header{
              color: white;
             }
-            #menuHeaders{
+            #menuHeaders1{
             color: white;
              }
+             #menuHeaders2{
+            color: white;
+             }
+            #menuHeaders3{
+            color: white;
+            }
+            #menuHeaders4{
+            color: white;
+            }
+            #menuHeaders5{
+            color: white;
+            }
         </style>
 </head>
 <body>
@@ -36,11 +49,11 @@
             <a id="header" class="navbar-brand">Home Hunter</a>
           </div>
           <ul class="nav navbar-nav navbar-right">
-            <li><a id="menuHeaders" href="./realtorListings.html"></span>Listings</a></li>
-            <li><a id="menuHeaders" href="./soldlistings.html"></span> Sold Listings</a></li>
-            <li><a id="menuHeaders" href="./realtorappointments.html"></span>Appointments</a></li>
-            <li><a id="menuHeaders" href="./realtorSettings.html"></span>Settings</a></li>
-            <li><a id="menuHeaders" href="../../index.html"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+            <li><a id="menuHeaders1" href="./realtorListings.html"></span>Listings</a></li>
+            <li><a id="menuHeaders2" href="./soldlistings.html"></span> Sold Listings</a></li>
+            <li><a id="menuHeaders3" href="./realtorappointments.html"></span>Appointments</a></li>
+            <li><a id="menuHeaders4" href="./realtorSettings.html"></span>Settings</a></li>
+            <li><a id="menuHeaders5" href="../../index.html"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
         </ul>
         </div>
       </nav>
@@ -64,7 +77,7 @@
                     <div class="form-group form-group-lg">
                         <label class="col-sm-2 control-label" for="lg">Realtor License Number</label>
                         <div class="col-sm-4">
-                            <input class="form-control" type="text" id="lg3" placeholder="xxxx" required="true">
+                            <input class="form-control" type="text" id="lg3" placeholder="xxxx" required="true" disabled>
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
@@ -82,7 +95,7 @@
 
                 <div class="form-group form-group-lg">
                     <div class="col-sm-4 col-sm-offset-8">
-                        <button type="submit" class="bbtn btn-primary btn-lg">Save</button>
+                        <button type="reset" onclick="updateInformation();" class="bbtn btn-primary btn-lg">Save</button>
                     </div>
                 </div>
 
