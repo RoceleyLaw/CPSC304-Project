@@ -38,15 +38,18 @@ function createNewRealtorAccount(){
                 
     var newJSON = JSON.stringify(obj);
     console.log(newJSON);
-
-    ajaxPost("https://evening-fjord-94245.herokuapp.com/allRealtors", 
-    function(){
-        console.log("POST Success"); 
-       window.location.assign("../../index.html");
-    }, 
-    function(error){
-        console.log("POST ERROR"); 
-        console.log(error); 
-    }, newJSON);
-    console.log("after");
+    if (obj.licenseNumber == ""){
+     alert('Please Enter Realtor License Number');
+    }
+    else {   ajaxPost("https://evening-fjord-94245.herokuapp.com/allRealtors", 
+        function(){
+            console.log("POST Success"); 
+            window.location.assign("../../index.html");
+        }, 
+        function(error){
+            console.log("POST ERROR"); 
+            console.log(error); 
+        }, newJSON);
+     console.log("after");
+    }
 }
