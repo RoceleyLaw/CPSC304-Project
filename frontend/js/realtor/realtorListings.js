@@ -233,6 +233,7 @@ function renderListingsAll(container, instance){
 
 function createNewListings(){
     var obj = new Object();
+    var endPoint;
     obj.listedPrice = document.getElementById("inputListedPrice").value;
     obj.streetName = document.getElementById("inputStreetName").value;
     obj.postalCode = document.getElementById("inputPostalCode").value;
@@ -240,6 +241,17 @@ function createNewListings(){
     obj.province = document.getElementById("inputProvince").value;
     obj.bathroom = document.getElementById("inputBathrooms").value;
     obj.bedroom = document.getElementById("inputBedrooms").value;
+    if(document.getElementById("house").checked == true){
+        obj.houseNumber = document.getElementById("inputHouseNumber").value;
+        obj.lotSize = document.getElementById("inputLotSize").value;
+        endPoint = "/allHouses";
+    }
+    else if(document.getElementById("appart").checked == true){
+        obj.buildingNumber =document.getElementById("inputBuildingNumber").value;
+        obj.apartmentRoomNumber = document.getElementById("inputApartmentRoomNumber").value;
+        endPoint = "/allApts";
+    }
+    else{endPoint = "/addNewPost";}
     var randomID = Math.floor((Math.random() * 10000000) + 10000);
     obj.listingID = randomID;
     obj.licenseNumber = "5770319"; //Hardcoded for now
@@ -249,7 +261,7 @@ function createNewListings(){
 
     console.log(newJSON);
 
-    ajaxPost("https://evening-fjord-94245.herokuapp.com/addNewPost", 
+    ajaxPost("https://evening-fjord-94245.herokuapp.com" + endPoint, 
     function(returnObject){
         console.log("POST SUCCESS"); 
         console.log(returnObject);
@@ -257,7 +269,7 @@ function createNewListings(){
         ajaxGet(ROUTE_URL + ALL_POSTS , 
         function(testObject){
             console.log("GET SUCCESS"); 
-            // console.log(testObject);
+            console.log(testObject);
             document.location.reload();
             renderListingsAll(document.getElementById("list"),listings);
         },
