@@ -223,12 +223,15 @@ function renderListings(container, instance, listName){
 }
 
 function renderListingsAll(container, instance){
-	var keys;
+    var keys;
+    var helperContainer = document.createElement("DIV");
+    helperContainer.id = "helperContainer"
 	for(keys in instance.details){
 		//console.log("print this")
 		var cont = renderListings("div", instance, keys);
-		container.appendChild(cont);
-	}
+		helperContainer.appendChild(cont);
+    }
+    container.appendChild(helperContainer);
 }
 
 function createNewListings(){
@@ -248,7 +251,7 @@ function createNewListings(){
     }
     else if(document.getElementById("appart").checked == true){
         obj.buildingNumber =document.getElementById("inputBuildingNumber").value;
-        obj.apartmentRoomNumber = document.getElementById("inputApartmentRoomNumber").value;
+        obj.apartmentRoomNumber = document.getElementById("inputHouseNumber").value;
         endPoint = "/allApts";
     }
     else{endPoint = "/addNewPost";}
@@ -332,13 +335,13 @@ function editListingsGet(id){
             document.getElementById("editBathrooms").value = getInfo[0].bathroom;
             document.getElementById("editBedrooms").value = getInfo[0].bedroom;
             globalID = id; 
-            globalistedPrice = document.getElementById("editListedPrice").value;
-            globalstreetname =  document.getElementById("editStreetName").value;
-            globalpostalCode = document.getElementById("editPostalCode").value;
-            globalcity =  document.getElementById("editCity").value;
-            globalprovince = document.getElementById("editProvince").value;
-            globalbathroom = document.getElementById("editBathrooms").value
-            globalbedroom = document.getElementById("editBedrooms").value
+            // globalistedPrice = document.getElementById("editListedPrice").value;
+            // globalstreetname =  document.getElementById("editStreetName").value;
+            // globalpostalCode = document.getElementById("editPostalCode").value;
+            // globalcity =  document.getElementById("editCity").value;
+            // globalprovince = document.getElementById("editProvince").value;
+            // globalbathroom = document.getElementById("editBathrooms").value
+            // globalbedroom = document.getElementById("editBedrooms").value
             console.log(getInfo[0]);
         },
         function(error){
@@ -360,10 +363,10 @@ function editListingsUpdate(){
         obj.listingID = globalID;
         obj.licenseNumber = "5770319"; //Hardcoded for now
         obj.pictureURL = "http://dummyimage.com/165x107.jpg/5fa2dd/ffffff";
-        console.log(newJSON);
+        //console.log(newJSON);
         ajaxPut("https://evening-fjord-94245.herokuapp.com/allposts/"  + globalID,function(success){
             console.log("UPDATED");
-            console.log(newJSON);
+            //console.log(newJSON);
             console.log(success); 
             document.location.reload();
             renderListingsAll(document.getElementById("list"),listings);
@@ -371,6 +374,43 @@ function editListingsUpdate(){
         function(error){
             console.log("UPDATE FAILED")
         }, obj);
+}
+
+function filterListings(){
+    if(document.getElementById("filterHouse").checked == true){
+        ajaxGet("https://evening-fjord-94245.herokuapp.com/allHouses", function(success){
+            console.log(success);
+            $("#helperContainer").remove();
+            //document.location.reload();
+            listings.details = success;
+            renderListingsAll(document.getElementById("list"),listings);
+        },function(error){
+            console.log("ERROR")
+        })
+    }
+    else if(document.getElementById("filterApartment").checked == true){
+        ajaxGet("https://evening-fjord-94245.herokuapp.com/allApts", function(success){
+            console.log(success);
+            $("#helperContainer").remove();
+            //document.location.reload();
+            listings.details = success;
+            renderListingsAll(document.getElementById("list"),listings);
+        },function(error){
+            console.log("ERROR")
+        })
+    }
+    else{
+        ajaxGet("https://evening-fjord-94245.herokuapp.com/allPosts", function(success){
+            console.log(success);
+            $("#helperContainer").remove();
+            //document.location.reload();
+            listings.details = success;
+            renderListingsAll(document.getElementById("list"),listings);
+        },function(error){
+            console.log("ERROR")
+        })
+    }
+
 }
 
 
