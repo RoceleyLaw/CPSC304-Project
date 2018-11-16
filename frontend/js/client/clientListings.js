@@ -216,6 +216,11 @@ function filterListings(){
 
 }
 
+function resetFilter(){
+    document.getElementById("filterBoth").checked = true;
+    filterListings();
+}
+
 
 window.onload = function() {
     console.log('Hello')

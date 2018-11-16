@@ -257,7 +257,7 @@ function createNewListings(){
     else{endPoint = "/addNewPost";}
     var randomID = Math.floor((Math.random() * 10000000) + 10000);
     obj.listingID = randomID;
-    obj.licenseNumber = "5770319"; //Hardcoded for now
+    obj.licenseNumber = REALTOR_NUMBER; //Hardcoded for now
     obj.pictureURL = "http://dummyimage.com/165x107.jpg/5fa2dd/ffffff";
 
     var newJSON = JSON.stringify(obj);
@@ -361,7 +361,7 @@ function editListingsUpdate(){
         obj.bedroom = document.getElementById("editBedrooms").value;
         //var randomID = Math.floor((Math.random() * 10000000) + 10000);
         obj.listingID = globalID;
-        obj.licenseNumber = "5770319"; //Hardcoded for now
+        obj.licenseNumber = REALTOR_NUMBER; //Hardcoded for now
         obj.pictureURL = "http://dummyimage.com/165x107.jpg/5fa2dd/ffffff";
         //console.log(newJSON);
         ajaxPut("https://evening-fjord-94245.herokuapp.com/allposts/"  + globalID,function(success){
@@ -411,6 +411,11 @@ function filterListings(){
         })
     }
 
+}
+
+function resetFilter(){
+    document.getElementById("filterBoth").checked = true;
+    filterListings();
 }
 
 
