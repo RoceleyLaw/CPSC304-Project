@@ -3,6 +3,7 @@ var CLIENT_PHONE_NUMBER;
 
 var ROUTE_URL = "https://evening-fjord-94245.herokuapp.com";
 var ALL_REALTORS = "/allRealtors"
+var APPOINTMENTS = "/appointments"; 
 
 
 var ajaxGet = function(url, onSuccess, onError){
@@ -104,7 +105,6 @@ var ajaxDelete = function(url, onSuccess, onError) {
 
 var populateDropDown = function(element, realtors) {
     for(key in realtors){
-        console.log(realtors[key].realtorName); 
         //add them to element
         var temp = document.createElement("option"); 
         temp.innerHTML = realtors[key].realtorName + " - " + realtors[key].licenseNumber;
@@ -127,7 +127,6 @@ var createDropDown = function(){
 }
 
 var createAppointment = function(){
-    console.log("hello"); 
     var val = document.getElementById("options").value;
     var array = val.split('- '); 
 
@@ -144,6 +143,81 @@ var createAppointment = function(){
 
 }
 
+var createNewAppointment = function(element, info) {
+    var tr = document.createElement("tr"); 
+
+    var td; 
+
+    td = document.createElement('td'); 
+    td.innerHTML = info[0];
+    tr.appendChild(td);  
+
+    td = document.createElement('td'); 
+    td.innerHTML = "15:00";
+    tr.appendChild(td); 
+
+    td = document.createElement('td'); 
+    td.innerHTML = "17:00:00";
+    tr.appendChild(td); 
+
+    td = document.createElement('td'); 
+    td.innerHTML = "10-9-2018";
+    tr.appendChild(td); 
+
+    td = document.createElement('td'); 
+    td.innerHTML = "UBC";
+    tr.appendChild(td); 
+
+    td = document.createElement('td');
+    var deleteButton = document.createElement('button');
+    deleteButton.setAttribute("class", "btn btn-danger");
+    deleteButton.setAttribute("type", "button"); 
+    deleteButton.innerHTML = "Delete"; 
+    var updateButton = document.createElement('button'); 
+    updateButton.setAttribute("class", "btn btn-success"); 
+    updateButton.setAttribute("type", "button"); 
+    updateButton.innerHTML = "Update"; 
+    td.appendChild(deleteButton); 
+    td.appendChild(updateButton);
+    tr.appendChild(td);  
+
+    element.appendChild(tr); 
+}
+
+var getAppointments = function(container){
+    while(container.firstChild){
+        container.removeChild(container.firstChild); 
+    }
+
+    ajaxGet(ROUTE_URL + APPOINTMENTS + "/" + CLIENT_PHONE_NUMBER, 
+            function(appointments){
+                listAllAppointments(container, appointments);  
+            }, 
+            function(error){
+                console.log("getting client appointments failed"); 
+                console.log(error); 
+            });
+}
+
+var listAllAppointments = function(container, appointments) {
+
+    console.log("list appt")
+    var count = 0; 
+    for(var key in appointments){
+        console.log(count); 
+        console.log(key); 
+        count++; 
+        var obj = appointments[key]; 
+        var info = []; 
+        info.push(obj.realtorName); 
+        info.push(obj.startTime); 
+        info.push(obj.endTime); 
+        info.push(obj.date); 
+        info.push(obj.location); 
+
+        createNewAppointment(container, info);
+    }
+}
 
 window.onload = function() {
     console.log('Hello')
@@ -169,4 +243,7 @@ window.onload = function() {
     element3.setAttribute("href",url3);
 
     createDropDown(); 
+
+    var smth = document.getElementById("tBodyAppointments"); 
+    getAppointments(smth); 
 }
