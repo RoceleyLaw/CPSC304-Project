@@ -102,14 +102,26 @@ var ajaxDelete = function(url, onSuccess, onError) {
 }
 
 
+var populateDropDown = function(element, realtors) {
+    for(key in realtors){
+        console.log(realtors[key].realtorName); 
+        //add them to element
+        var temp = document.createElement("option"); 
+        temp.innerHTML = realtors[key].realtorName + " - " + realtors[key].licenseNumber;
+        element.appendChild(temp); 
+    }
+
+}
+
 var createDropDown = function(){
     var options = document.getElementById("options");
     ajaxGet(ROUTE_URL + ALL_REALTORS, 
-        function(testobject){
-            
+        function(realtors){
+            populateDropDown(options, realtors); 
     },
         function(error){
-        console.log("ERROR")
+        console.log("ERROR from create drop down")
+        console.log(error); 
     })
 
 }
@@ -137,4 +149,6 @@ window.onload = function() {
     var url3 = "./clientSettings.html?id=" + CLIENT_PHONE_NUMBER; 
     var element3 = document.getElementById('menuHeaders3');
     element3.setAttribute("href",url3);
+
+    createDropDown(); 
 }
