@@ -109,17 +109,38 @@ var ajaxDelete = function(url, onSuccess, onError) {
 var createRealtorAppointment = function(){
     console.log("hello"); 
     var obj = new Object(); 
+    var val = document.getElementById("phoneNumberOptions").value;
+    var array1 = val.split('- '); 
     obj.licenseNumber = REALTOR_NUMBER; 
-    obj.phoneNumber = document.getElementById("input1").value; 
+    obj.phoneNumber = array1[0]; 
     obj.startTime = document.getElementById("input2").value; 
     obj.endTime = document.getElementById("input3").value; 
     obj.date = document.getElementById("input4").value; 
-    obj.locations = document.getElementById("input5").value; 
-   
-
+    obj.location = document.getElementById("input5").value; 
+    obj.appointmentID= 90;
     var newJSON = JSON.stringify(obj); 
     console.log(newJSON); 
+    console.log("start Post");
+    var check1 = obj.startTime
+    var array2 = check1.split(':'); 
+    var check2 = obj.endTime
+    var array3 = check2.split(':'); 
+
+    if((array2[0]<= array3[0]) && (array2[1]< array3[1])){
+        ajaxPost("https://evening-fjord-94245.herokuapp.com/appointments", function(){
+            console.log("POST Success"); 
+            location.reload();
+        }, 
+        function(error){
+            console.log("POST ERROR"); 
+            console.log(error); 
+        }, newJSON);
+    }
+    else{
+        alert("Please Check Start and End Time");
+    }
 }
+
 var populateDropDown = function(element, listings) {
     for(key in listings){
        //add them to element
@@ -135,6 +156,28 @@ var createDropDown = function(){
     ajaxGet(ROUTE_URL + ALL_LISTINGS, 
         function(listings){
             populateDropDown(options, listings); 
+    },
+        function(error){
+        console.log("ERROR from create drop down")
+        console.log(error); 
+    })
+
+}
+var populatePhoneNumberDropDown = function(element, phoneNumber) {
+    for(key in phoneNumber){
+       //add them to element
+        var temp = document.createElement("option"); 
+        temp.innerHTML = phoneNumber[key].phoneNumber + " - " + phoneNumber[key].clientName;
+        element.appendChild(temp); 
+    }
+
+}
+
+var createDropDownForPhoneNumber = function(){
+    var options = document.getElementById("phoneNumberOptions");
+    ajaxGet("https://evening-fjord-94245.herokuapp.com/allClients", 
+        function(phoneNumbers){
+            populatePhoneNumberDropDown(options, phoneNumbers); 
     },
         function(error){
         console.log("ERROR from create drop down")
@@ -184,6 +227,7 @@ window.onload = function() {
     element4.setAttribute("href",url4);
 
     createDropDown(); 
+    createDropDownForPhoneNumber();
 
 
 }
