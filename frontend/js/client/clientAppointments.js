@@ -141,6 +141,25 @@ var createAppointment = function(){
     var newJSON = JSON.stringify(obj); 
     console.log(newJSON); 
 
+    var check1 = obj.startTime
+    var array2 = check1.split(':'); 
+    var check2 = obj.endTime
+    var array3 = check2.split(':'); 
+
+    if((array2[0]<= array3[0]) && (array2[1]< array3[1])){
+        ajaxPost("https://evening-fjord-94245.herokuapp.com/appointments", function(){
+            console.log("POST Success"); 
+            location.reload();
+        }, 
+        function(error){
+            console.log("POST ERROR"); 
+            console.log(error); 
+        }, newJSON);
+    }
+    else{
+        alert("Please Check Start and End Time");
+    }
+
 }
 
 var createNewAppointment = function(element, info) {
@@ -176,6 +195,8 @@ var createNewAppointment = function(element, info) {
     deleteButton.setAttribute("onclick", "deleteAppointment(" + info[5] + ")");
     var updateButton = document.createElement('button'); 
     updateButton.setAttribute("class", "btn btn-success"); 
+    updateButton.setAttribute("data-toggle", "modal");
+    updateButton.setAttribute("data-target","#myModal");
     updateButton.setAttribute("type", "button"); 
     updateButton.innerHTML = "Update"; 
     td.appendChild(deleteButton); 
@@ -232,6 +253,24 @@ function deleteAppointment(id){
             console.log("POST ERROR"); 
             console.log(error); 
         });
+}
+
+var getAppointmentInfo{
+    ajaxGet(, 
+        function(testObject){
+            console.log("GET SUCCESS");            
+            console.log(testObject[0].realtorName);
+            document.getElementById("editStartTime").value=1
+            document.getElementById("editStartTime").value=2;
+            document.getElementById("editEndTime").value=3;
+            document.getElementById("editDate").value=4;
+            document.getElementById("editLocation").value=5;
+            
+        },
+        function(error){
+            console.log("GET ERROR"); 
+            console.log(error);
+        }); 
 }
 
 window.onload = function() {
