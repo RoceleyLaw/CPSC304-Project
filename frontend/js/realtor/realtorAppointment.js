@@ -3,7 +3,50 @@ var REALTOR_NUMBER;
 
 var POST_ROUTE = "https://evening-fjord-94245.herokuapp.com/";
 
-var ajaxPost = function(url, onSuccess, onError){
+var ROUTE_URL = "https://evening-fjord-94245.herokuapp.com";
+var ALL_REALTORS = "/allRealtors"
+
+
+var ajaxGet = function(url, onSuccess, onError){
+    var xhttp = new XMLHttpRequest();
+    xhttp.timeout = 3000; // timeout set to 2 seconds 
+    var sendCount = 0; 
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var products = JSON.parse(xhttp.responseText); //convert payload to object
+            onSuccess(products); 
+        } else if(this.readyState == 4 && this.status == 500) {
+            if(sendCount > 2) {
+                onError(xhttp.responseText); 
+            } else {
+                sendCount++; 
+                //send request again 
+                xhttp.open("GET", url, true);
+                xhttp.send();
+            }
+        }
+    };
+
+    xhttp.ontimeout = function (error) {
+        console.log("TIMEOUT");
+        console.log(error); 
+        if(sendCount > 2) {
+            onError("Timeout Occurred"); 
+        } else {
+            sendCount++; 
+            //send request again 
+            xhttp.open("GET", url, true);
+            xhttp.send();
+        }
+      };
+    
+    //send the request for the first time
+    xhttp.open("GET", url, true);
+    xhttp.send();
+}
+
+var ajaxPost = function(url, onSuccess, onError, jsonString){
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", url, true);
 
@@ -21,8 +64,62 @@ var ajaxPost = function(url, onSuccess, onError){
     }
 
     //xhttp.send("foo=bar&lorem=ipsum"); 
-    xhttp.send(JSON.stringify(postData)); 
+    xhttp.send(jsonString); 
 }
+
+var ajaxPut = function(url, onSuccess, onError, putJSON){
+    var xhttp = new XMLHttpRequest(); 
+    xhttp.open("PUT", url, true); 
+
+    xhttp.setRequestHeader("Content-Type", "application/json"); 
+
+    xhttp.onreadystatechange = function() {
+        if(this.readyState == 4 && this.status == 200) {
+            var responseObject = JSON.parse(xhttp.responseText); 
+            onSuccess(responseObject); 
+        } else if (this.readyState == 4 && this.status == 500) {
+            onError(xhttp.responseText); 
+        }
+    }
+
+    xhttp.send(JSON.stringify(putJSON)); 
+}
+
+var ajaxDelete = function(url, onSuccess, onError) {
+    var xhttp = new XMLHttpRequest(); 
+    xhttp.open("DELETE", url, true); 
+
+    xhttp.setRequestHeader("Content-Type", "application/json"); 
+
+    xhttp.onreadystatechange = function() {
+        if(this.readyState == 4 && this.status == 200) {
+            var responseObject = JSON.parse(xhttp.responseText); 
+            onSuccess(responseObject); 
+        } else if (this.readyState == 4 && this.status == 500) {
+            onError(xhttp.responseText); 
+        }
+    }
+
+    xhttp.send(null); 
+}
+
+
+
+var createRealtorAppointment = function(){
+    console.log("hello"); 
+    var obj = new Object(); 
+    obj.licenseNumber = REALTOR_NUMBER; 
+    obj.phoneNumber = document.getElementById("input1").value; ; 
+    obj.startTime = document.getElementById("input2").value; 
+    obj.endTime = document.getElementById("input3").value; 
+    obj.date = document.getElementById("input4").value; 
+    obj.locations = document.getElementById("input5").value; 
+   
+
+    var newJSON = JSON.stringify(obj); 
+    console.log(newJSON); 
+}
+
 
 window.onload = function() {
     console.log('Realtor Appointment');
