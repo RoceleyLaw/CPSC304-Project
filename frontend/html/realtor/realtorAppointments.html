@@ -208,29 +208,24 @@
                               <div class="form-group col-md-2">
                                 <label>Listing ID</label>
                                 <!--<input type="" class="form-control" placeholder="Name">-->
-                                <select class="form-control">
+                                <select id="listingOptions" class="form-control">
                                   <option>Select Listing ID</option>
-                                  <option>Option 1</option>
-                                  <option>Option 2</option>
-                                  <option>Option 3</option>
-                                  <option>Option 4</option>
-                                  <option>Option 5</option>
-                                  </select>
+                                </select>
                               </div>
                               <div class="form-group col-md-2">
                                 <label>Start Time</label>
-                                <input type="" class="form-control" placeholder="XX:XX">
+                                <input id="inputStartTime" type="" class="form-control" placeholder="XX:XX">
                               </div>
                               <div class="form-group col-md-2">
                                 <label>End Time</label>
-                                <input type="" class="form-control" placeholder="">
+                                <input id="inputEndTime" type="" class="form-control" placeholder="XX:XX">
                               </div>
                               <div class="form-group col-md-2">
                                     <label>Date</label>
-                                    <input type="" class="form-control" placeholder="">
+                                    <input id="inputDate" type="" class="form-control" placeholder="YYYY-MM-DD">
                                   </div>
                               <div id="createOpenButton" class="form-group col-md-2">
-                                <button type="button" class="btn btn-success">Create</button>
+                                <button type="button" onclick="createOpenHouse();" class="btn btn-success">Create</button>
                               </div>
                             </div>
                           </form>

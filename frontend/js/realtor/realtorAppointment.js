@@ -4,7 +4,8 @@ var REALTOR_NUMBER;
 var POST_ROUTE = "https://evening-fjord-94245.herokuapp.com/";
 
 var ROUTE_URL = "https://evening-fjord-94245.herokuapp.com";
-var ALL_REALTORS = "/allRealtors"
+var ALL_LISTINGS = "/allUnsoldPosts"
+
 
 
 var ajaxGet = function(url, onSuccess, onError){
@@ -109,13 +110,45 @@ var createRealtorAppointment = function(){
     console.log("hello"); 
     var obj = new Object(); 
     obj.licenseNumber = REALTOR_NUMBER; 
-    obj.phoneNumber = document.getElementById("input1").value; ; 
+    obj.phoneNumber = document.getElementById("input1").value; 
     obj.startTime = document.getElementById("input2").value; 
     obj.endTime = document.getElementById("input3").value; 
     obj.date = document.getElementById("input4").value; 
     obj.locations = document.getElementById("input5").value; 
    
 
+    var newJSON = JSON.stringify(obj); 
+    console.log(newJSON); 
+}
+var populateDropDown = function(element, listings) {
+    for(key in listings){
+       //add them to element
+        var temp = document.createElement("option"); 
+        temp.innerHTML = listings[key].listingID;
+        element.appendChild(temp); 
+    }
+
+}
+
+var createDropDown = function(){
+    var options = document.getElementById("listingOptions");
+    ajaxGet(ROUTE_URL + ALL_LISTINGS, 
+        function(listings){
+            populateDropDown(options, listings); 
+    },
+        function(error){
+        console.log("ERROR from create drop down")
+        console.log(error); 
+    })
+
+}
+var createOpenHouse = function(){
+    console.log("hello"); 
+    var obj = new Object(); 
+    obj.listingID = document.getElementById("listingOptions").value;;  
+    obj.startTime = document.getElementById("inputStartTime").value; 
+    obj.endTime = document.getElementById("inputEndTime").value; 
+    obj.date = document.getElementById("inputDate").value;    
     var newJSON = JSON.stringify(obj); 
     console.log(newJSON); 
 }
@@ -150,6 +183,7 @@ window.onload = function() {
     var element4 = document.getElementById('menuHeaders4');
     element4.setAttribute("href",url4);
 
+    createDropDown(); 
 
 
 }
