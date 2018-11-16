@@ -121,38 +121,33 @@
       <div class="form-group col-md-3">
         <label>Realtor</label>
         <!--<input type="" class="form-control" placeholder="Name">-->
-        <select class="form-control">
+        <select id="options" class="form-control">
           <option>Select Realtor</option>
-          <option>Option 1</option>
-          <option>Option 2</option>
-          <option>Option 3</option>
-          <option>Option 4</option>
-          <option>Option 5</option>
           </select>
       </div>
       <div class="form-group col-md-2">
         <label>Start Time</label>
-        <input type="" class="form-control" placeholder="XX:XX">
+        <input type="" id="in1" class="form-control" placeholder="XX:XX">
       </div>
       <div class="form-group col-md-2">
           <label>End Time</label>
-          <input type="" class="form-control" placeholder="XX:XX">
+          <input type="" id="in2" class="form-control" placeholder="XX:XX">
      </div>
      <div class="form-group col-md-2">
         <label>Date</label>
-        <input type="" class="form-control" placeholder="XX:XX">
+        <input type="" id="in3" class="form-control" placeholder="XX:XX">
      </div>
       <div class="form-group col-md-2">
         <label>Location</label>
-        <input type="" class="form-control" placeholder="">
+        <input type="" id="in4" class="form-control" placeholder="">
       </div>
       <div id="createApptButton" class="form-group col-md-2">
-        <button type="button" class="btn btn-success">Create</button>
+        <button type="button" onclick="createAppointment();" class="btn btn-success">Create</button>
       </div>
     </div>
   </form>
 </div>
-
+<br>
 <div>
     <h1>Open Houses</h1>
     <div id="AppointmentTable"> 
@@ -163,7 +158,6 @@
             <th>Start Time</th>
             <th>End Time</th>
             <th>Date</th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -172,18 +166,12 @@
             <td>15:00</td>
             <td>17:00:00</td>
             <td>10-9-2018</td>
-            <td>
-              <button type="button" class="btn btn-danger">Delete</button>
-          </td>
          </tr>
           <tr>
             <td>12121</td>
             <td>17:00</td>
             <td>19:00</td>
             <td>10-9-2018</td>
-            <td>
-              <button type="button" class="btn btn-danger">Delete</button>
-          </td>
          </tr>
         </tbody>
       </table>
