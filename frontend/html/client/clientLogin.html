@@ -60,24 +60,70 @@
 
 <!--TODO: MAKE IT CHECK WITH DATABASE INSTEAD OF HARD CODING-->
 <script>
+        var ajaxGet = function(url, onSuccess, onError){
+        var xhttp = new XMLHttpRequest();
+        xhttp.timeout = 3000; // timeout set to 2 seconds 
+        var sendCount = 0; 
+
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var products = JSON.parse(xhttp.responseText); //convert payload to object
+                onSuccess(products); 
+            } else if(this.readyState == 4 && this.status == 500) {
+                if(sendCount > 2) {
+                    onError(xhttp.responseText); 
+                } else {
+                    sendCount++; 
+                    //send request again 
+                    xhttp.open("GET", url, true);
+                    xhttp.send();
+                }
+            }
+        };
+
+        xhttp.ontimeout = function (error) {
+            console.log("TIMEOUT");
+            console.log(error); 
+            if(sendCount > 2) {
+                onError("Timeout Occurred"); 
+            } else {
+                sendCount++; 
+                //send request again 
+                xhttp.open("GET", url, true);
+                xhttp.send();
+            }
+        };
+        
+        //send the request for the first time
+        xhttp.open("GET", url, true);
+        xhttp.send();
+    }
   function check() {
      console.log("HELOOOOO"); 
+     var phoneNumber =[];
 	 var name = document.getElementById("usr").value;
 	 var password = document.getElementById("pwd").value;
-
-	 if(name =="6362244049" &&  password == "9460"){
-          //window.alert("successful");
-          console.log("HI"); 
-          //window.open("./listings.html");
-          var path = "./listings.html?id=" + name; 
-          window.location.assign(path);
-
-	 }
-	 else {
-      window.alert("Incorrect User Name or Password. Please Try Again.");
-      document.getElementById('errorMessage').innerHTML="** Incorrect User Name or Password. Please Try Again." ;
-	 }
-  }
+     ajaxGet("https://evening-fjord-94245.herokuapp.com/allClients", 
+        function(client){
+          for(var keys in client){
+              phoneNumber.push(client[keys].phoneNumber)
+          }
+            for(var keys in phoneNumber){
+                console.log("here");
+                if(phoneNumber[keys]==name &&  password == "9460"){
+                    console.log("HI"); 
+                    var path = "./listings.html?id=" + name; 
+                    window.location.assign(path);                    
+                }
+            }
+    },
+        function(error){
+        console.log("ERROR from create drop down")
+        console.log(error); 
+    });
+  
+  
+}
 </script>
 
 </body>

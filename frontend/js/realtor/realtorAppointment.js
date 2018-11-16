@@ -126,7 +126,7 @@ var createRealtorAppointment = function(){
     var check2 = obj.endTime
     var array3 = check2.split(':'); 
 
-    if((array2[0]<= array3[0]) && (array2[1]< array3[1])){
+    if((array2[0]<= array3[0]) && (array2[1]< array3[1]) || (array2[0] <= array3[0]) && (array2[1] = array3[1]) ){
         ajaxPost("https://evening-fjord-94245.herokuapp.com/appointments", function(){
             console.log("POST Success"); 
             location.reload();
