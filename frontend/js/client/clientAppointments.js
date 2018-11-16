@@ -178,6 +178,7 @@ var createNewAppointment = function(element, info) {
     updateButton.setAttribute("class", "btn btn-success"); 
     updateButton.setAttribute("type", "button"); 
     updateButton.innerHTML = "Update"; 
+    updateButton.setAttribute("onclick", "updateAppointment(" + info[5] + ")"); 
     td.appendChild(deleteButton); 
     td.appendChild(updateButton);
     tr.appendChild(td);  
@@ -232,6 +233,10 @@ function deleteAppointment(id){
             console.log("POST ERROR"); 
             console.log(error); 
         });
+}
+
+function updateAppointment(id) {
+    console.log("UPDATE: " + id); 
 }
 
 window.onload = function() {
