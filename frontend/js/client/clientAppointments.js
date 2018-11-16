@@ -153,19 +153,19 @@ var createNewAppointment = function(element, info) {
     tr.appendChild(td);  
 
     td = document.createElement('td'); 
-    td.innerHTML = "15:00";
+    td.innerHTML = info[1];
     tr.appendChild(td); 
 
     td = document.createElement('td'); 
-    td.innerHTML = "17:00:00";
+    td.innerHTML = info[2];
     tr.appendChild(td); 
 
     td = document.createElement('td'); 
-    td.innerHTML = "10-9-2018";
+    td.innerHTML = info[3]; //"10-9-2018";
     tr.appendChild(td); 
 
     td = document.createElement('td'); 
-    td.innerHTML = "UBC";
+    td.innerHTML = info[4]; //"UBC";
     tr.appendChild(td); 
 
     td = document.createElement('td');
@@ -173,6 +173,7 @@ var createNewAppointment = function(element, info) {
     deleteButton.setAttribute("class", "btn btn-danger");
     deleteButton.setAttribute("type", "button"); 
     deleteButton.innerHTML = "Delete"; 
+    deleteButton.setAttribute("onclick", "deleteAppointment(" + info[5] + ")");
     var updateButton = document.createElement('button'); 
     updateButton.setAttribute("class", "btn btn-success"); 
     updateButton.setAttribute("type", "button"); 
@@ -202,21 +203,35 @@ var getAppointments = function(container){
 var listAllAppointments = function(container, appointments) {
 
     console.log("list appt")
-    var count = 0; 
     for(var key in appointments){
-        console.log(count); 
-        console.log(key); 
-        count++; 
-        var obj = appointments[key]; 
+        var obj = appointments[key];
+        console.log(obj); 
         var info = []; 
         info.push(obj.realtorName); 
         info.push(obj.startTime); 
         info.push(obj.endTime); 
         info.push(obj.date); 
-        info.push(obj.location); 
+        info.push(obj.location);
+        info.push(obj.appointmentID);  
 
         createNewAppointment(container, info);
     }
+}
+
+function deleteAppointment(id){
+    console.log(id); 
+
+    ajaxDelete(ROUTE_URL + APPOINTMENTS + "/" + id, 
+        function(returnObject){
+            console.log("DELETE SUCCESS"); 
+            console.log(returnObject);
+            var smth = document.getElementById("tBodyAppointments"); 
+            getAppointments(smth); 
+        }, 
+        function(error){
+            console.log("POST ERROR"); 
+            console.log(error); 
+        });
 }
 
 window.onload = function() {
@@ -242,8 +257,9 @@ window.onload = function() {
     var element3 = document.getElementById('menuHeaders3');
     element3.setAttribute("href",url3);
 
-    createDropDown(); 
+    createDropDown(); //puts all the realtors in the dropdown 
 
+    //adds all the clients appointments in 
     var smth = document.getElementById("tBodyAppointments"); 
     getAppointments(smth); 
 }
