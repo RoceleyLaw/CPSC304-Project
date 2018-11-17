@@ -1,5 +1,6 @@
 //GLOBAL VARIABLES 
 var REALTOR_NUMBER; 
+var POSTAL_CODES=[];
 
 //testing request
 
@@ -134,6 +135,16 @@ var ajaxDelete = function(url, onSuccess, onError) {
 
     xhttp.send(null); 
 }
+
+ajaxGet("https://evening-fjord-94245.herokuapp.com/postalcodes", function(success){
+    for(var keys in success){
+        POSTAL_CODES.push(success[keys].postalCode);
+    }
+    console.log("SUCCESS GET POSTAL CODE")
+}, function(error){
+    console.log("Failed")
+    POSTAL_CODES = null;
+});
 
 ajaxGet("https://evening-fjord-94245.herokuapp.com/allposts", function(success){
     listings.details = success;
@@ -380,10 +391,11 @@ function filterListings(){
     if(document.getElementById("filterHouse").checked == true){
         ajaxGet("https://evening-fjord-94245.herokuapp.com/allHouses", function(success){
             console.log(success);
-            $("#helperContainer").remove();
+            //$("#helperContainer").remove();
             //document.location.reload();
             listings.details = success;
-            renderListingsAll(document.getElementById("list"),listings);
+            filterNearby();
+            //renderListingsAll(document.getElementById("list"),listings);
         },function(error){
             console.log("ERROR")
         })
@@ -391,10 +403,11 @@ function filterListings(){
     else if(document.getElementById("filterApartment").checked == true){
         ajaxGet("https://evening-fjord-94245.herokuapp.com/allApts", function(success){
             console.log(success);
-            $("#helperContainer").remove();
+           // $("#helperContainer").remove();
             //document.location.reload();
             listings.details = success;
-            renderListingsAll(document.getElementById("list"),listings);
+            filterNearby();
+            //renderListingsAll(document.getElementById("list"),listings);
         },function(error){
             console.log("ERROR")
         })
@@ -402,20 +415,63 @@ function filterListings(){
     else{
         ajaxGet("https://evening-fjord-94245.herokuapp.com/allPosts", function(success){
             console.log(success);
-            $("#helperContainer").remove();
+            //filterNearby();
             //document.location.reload();
             listings.details = success;
-            renderListingsAll(document.getElementById("list"),listings);
+            filterNearby();
+            //renderListingsAll(document.getElementById("list"),listings);
         },function(error){
             console.log("ERROR")
         })
     }
-
 }
 
 function resetFilter(){
     document.getElementById("filterBoth").checked = true;
     filterListings();
+}
+
+
+function filterNearby(){
+    var counter = 0 ;
+    var counter1 = 0;
+    var nearbyCondition = [];
+    var tempNearbyList = {};
+    var tempListingDetails = {};
+    if(document.getElementById("filterNearbyRestaurant").checked == true)
+        nearbyCondition.push("Restaurant");
+    if(document.getElementById("filterNearbyGym").checked == true)
+        nearbyCondition.push("Gym");
+    if(document.getElementById("filterNearbyMall").checked == true)
+        nearbyCondition.push("Mall");
+    ajaxGet("https://evening-fjord-94245.herokuapp.com/facilities", function(success){
+            //tempNearbyList = success;
+            for(var i = 0; i<nearbyCondition.length; i++){
+                for(var keys in success){
+                    if(success[keys].type == nearbyCondition[i]){
+                        tempNearbyList[counter] = success[keys].listingID;
+                        counter++;
+                    }
+                }
+            }if(nearbyCondition.length != 0){
+            tempListingDetails = listings.details;
+            listings.details = {}
+            for (var key1 in tempNearbyList){
+                for(var key2 in tempListingDetails){
+                    console.log("COMPARING" + tempListingDetails[key2].listingID + " + " +  tempNearbyList[key1])
+                    if(tempListingDetails[key2].listingID == tempNearbyList[key1]){
+                        listings.details[counter1] = tempListingDetails[key2]
+                        counter1++;
+                        break;
+                    }
+                }
+            }}
+            console.log(listings.details);
+            $("#helperContainer").remove();
+            renderListingsAll(document.getElementById("list"),listings);
+        },function(error){
+            console.log("ERROR")
+        })
 }
 
 
