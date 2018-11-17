@@ -135,7 +135,7 @@ var createAppointment = function(){
     obj.startTime = document.getElementById("in1").value; 
     obj.endTime = document.getElementById("in2").value; 
     obj.date = document.getElementById("in3").value; 
-    obj.locations = document.getElementById("in4").value; 
+    obj.location = document.getElementById("in4").value; 
     obj.phoneNumber = CLIENT_PHONE_NUMBER; 
 
     var newJSON = JSON.stringify(obj); 

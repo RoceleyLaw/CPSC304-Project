@@ -5,6 +5,7 @@ var POST_ROUTE = "https://evening-fjord-94245.herokuapp.com/";
 
 var ROUTE_URL = "https://evening-fjord-94245.herokuapp.com";
 var ALL_LISTINGS = "/allUnsoldPosts"
+var APPOINTMENTS = "/appointments"; 
 
 
 
@@ -196,6 +197,110 @@ var createOpenHouse = function(){
     console.log(newJSON); 
 }
 
+/*
+    APPOINTMENT CODE 
+*/
+var createNewAppointment = function(element, info) {
+    var tr = document.createElement("tr"); 
+
+    var td; 
+
+    td = document.createElement('td'); 
+    td.innerHTML = info[0];
+    tr.appendChild(td);  
+
+    td = document.createElement('td'); 
+    td.innerHTML = info[1];
+    tr.appendChild(td); 
+
+    td = document.createElement('td'); 
+    td.innerHTML = info[2];
+    tr.appendChild(td); 
+
+    td = document.createElement('td'); 
+    td.innerHTML = info[3]; //"10-9-2018";
+    tr.appendChild(td); 
+
+    td = document.createElement('td'); 
+    td.innerHTML = info[4]; //"UBC";
+    tr.appendChild(td); 
+
+    td = document.createElement('td'); 
+    td.innerHTML = info[5]; 
+    tr.appendChild(td); 
+
+    td = document.createElement('td');
+    var deleteButton = document.createElement('button');
+    deleteButton.setAttribute("class", "btn btn-danger");
+    deleteButton.setAttribute("type", "button"); 
+    deleteButton.innerHTML = "Delete"; 
+    deleteButton.setAttribute("onclick", "deleteAppointment(" + info[6] + ")");
+    var updateButton = document.createElement('button'); 
+    updateButton.setAttribute("class", "btn btn-success"); 
+    updateButton.setAttribute("type", "button"); 
+    updateButton.innerHTML = "Update"; 
+    updateButton.setAttribute("onclick", "updateAppointment(" + info[6] + ")"); 
+    td.appendChild(deleteButton); 
+    td.appendChild(updateButton);
+    tr.appendChild(td);  
+
+    element.appendChild(tr); 
+}
+
+var getAppointments = function(container){
+    while(container.firstChild){
+        container.removeChild(container.firstChild); 
+    }
+
+    ajaxGet(ROUTE_URL + APPOINTMENTS + "/byrealtor" + "/" + REALTOR_NUMBER, 
+            function(appointments){
+                listAllAppointments(container, appointments);  
+            }, 
+            function(error){
+                console.log("getting realotr appointments failed"); 
+                console.log(error); 
+            });
+}
+
+var listAllAppointments = function(container, appointments) {
+
+    console.log("list appt")
+    for(var key in appointments){
+        var obj = appointments[key];
+        console.log(obj); 
+        var info = []; 
+        info.push(obj.clientName); 
+        info.push(obj.phoneNumber); 
+        info.push(obj.startTime); 
+        info.push(obj.endTime); 
+        info.push(obj.date); 
+        info.push(obj.location);
+        info.push(obj.appointmentID);  
+
+        createNewAppointment(container, info);
+    }
+}
+
+function deleteAppointment(id){
+    console.log(id); 
+
+    ajaxDelete(ROUTE_URL + APPOINTMENTS + "/" + id, 
+        function(returnObject){
+            console.log("DELETE SUCCESS"); 
+            console.log(returnObject);
+            var smth = document.getElementById("realtorBodyAppointments"); 
+            getAppointments(smth); 
+        }, 
+        function(error){
+            console.log("POST ERROR"); 
+            console.log(error); 
+        });
+}
+
+function updateAppointment(id) {
+    console.log("UPDATE: " + id); 
+}
+
 
 window.onload = function() {
     console.log('Realtor Appointment');
@@ -228,6 +333,9 @@ window.onload = function() {
 
     createDropDown(); 
     createDropDownForPhoneNumber();
+
+    var smth = document.getElementById("realtorBodyAppointments"); 
+    getAppointments(smth); 
 
 
 }
