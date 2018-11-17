@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home Hunter</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    .navbar-inverse{
+        background-color: green;
+    } 
+    #header{
+        color: white;
+    }
+    .container{
+        margin-top:100px;
+        width: 60%;
+        border: 3px solid #73AD21;
+        padding: 10px;
+        text-align: center;
+    }
+  </style>
+</head>
+<body>
+        <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a href="../../index.html" id="header" class="navbar-brand">Home Hunter</a>
+                        </div>
+                </div>
+            </nav>
+        <div id="register-page" class="container">
+                <form class="form-horizontal" role="form">
+                    <h2 style="padding-left: 0;">Client Login</h2>
+                    <div>
+                        <div class="form-group form-group-lg">
+                                <label class="col-sm-4 control-label" for="lg">Phone Number</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" type="text" id="usr" placeholder="Phone Number" required="true">
+                                </div>
+                        </div>
+                        <div class="form-group form-group-lg">
+                                <label class="col-sm-4 control-label" for="lg">Password</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" type="password" id="pwd" placeholder="Password" required="true">
+                                </div>
+                        </div>
+                
+    
+                    <div class="form-group form-group-lg">
+                        <div class="col-sm-4 col-sm-offset-8">
+                            <button type="reset" onclick="check()" class="bbtn btn-success btn-lg">Login</button>
+                        </div>
+                    </div>
+    
+                </form>
+            </div>
+
+<!--TODO: MAKE IT CHECK WITH DATABASE INSTEAD OF HARD CODING-->
+<script>
+        var ajaxGet = function(url, onSuccess, onError){
+        var xhttp = new XMLHttpRequest();
+        xhttp.timeout = 3000; // timeout set to 2 seconds 
+        var sendCount = 0; 
+
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var products = JSON.parse(xhttp.responseText); //convert payload to object
+                onSuccess(products); 
+            } else if(this.readyState == 4 && this.status == 500) {
+                if(sendCount > 2) {
+                    onError(xhttp.responseText); 
+                } else {
+                    sendCount++; 
+                    //send request again 
+                    xhttp.open("GET", url, true);
+                    xhttp.send();
+                }
+            }
+        };
+
+        xhttp.ontimeout = function (error) {
+            console.log("TIMEOUT");
+            console.log(error); 
+            if(sendCount > 2) {
+                onError("Timeout Occurred"); 
+            } else {
+                sendCount++; 
+                //send request again 
+                xhttp.open("GET", url, true);
+                xhttp.send();
+            }
+        };
+        
+        //send the request for the first time
+        xhttp.open("GET", url, true);
+        xhttp.send();
+    }
+  function check() {
+     console.log("HELOOOOO"); 
+     var phoneNumber =[];
+	 var name = document.getElementById("usr").value;
+	 var password = document.getElementById("pwd").value;
+     ajaxGet("https://evening-fjord-94245.herokuapp.com/allClients", 
+        function(client){
+          for(var keys in client){
+              phoneNumber.push(client[keys].phoneNumber)
+          }
+            for(var keys in phoneNumber){
+                console.log("here");
+                if(phoneNumber[keys]==name &&  password == "9460"){
+                    console.log("HI"); 
+                    var path = "./listings.html?id=" + name; 
+                    window.location.assign(path);                    
+                }
+            }
+    },
+        function(error){
+        console.log("ERROR from create drop down")
+        console.log(error); 
+    });
+  
+  
+}
+</script>
+
+</body>
+</html>

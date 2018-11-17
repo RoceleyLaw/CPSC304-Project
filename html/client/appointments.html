@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../../js/client/clientAppointments.js"></script>
+  <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 550px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      width: 15%;
+      height: 100%;
+    }
+       
+    .navbar-inverse{
+      background-color: green;
+    } 
+    /* On small screens, set height to 'auto' for the grid */
+    @media screen and (max-width: 767px) {
+      .row.content {height: auto;} 
+    }
+    #header{
+      color: white;
+    }
+    #menuHeaders1{
+      color: white;
+    }
+    #menuHeaders2{
+      color: white;
+    }
+    #menuHeaders3{
+      color: white;
+    }
+    #menuHeaders4{
+      color: white;
+    }
+    #AppointmentTable{
+      padding-left: 100px;
+      padding-right: 100px;
+    }
+
+    #createApptButton{
+      float: right;
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a id="header" class="navbar-brand">Home Hunter</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a id="menuHeaders1" href="./listings.html"></span>Listings</a></li>
+        <li><a id="menuHeaders2" href="./appointments.html"></span>Appointments</a></li>
+        <li><a id="menuHeaders3" href="./clientSettings.html"></span>Settings</a></li>
+        <li><a id="menuHeaders4" href="../../index.html"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+    </ul>
+  </div>
+</nav>
+<div>
+  <h1>My Appointments</h1>
+  <div id="AppointmentTable"> 
+    <table class="table">
+     <thead>
+        <tr>
+          <th>Realtor Name</th>
+          <th>Start Time</th>
+          <th>End Time</th>
+          <th>Date</th>
+          <th>Location</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="tBodyAppointments">
+        <tr>
+          <td>Charnvir</td>
+          <td>15:00</td>
+          <td>17:00:00</td>
+          <td>10-9-2018</td>
+          <td>UBC</td>
+          <td>
+            <button type="button" class="btn btn-danger">Delete</button>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Update</button>           
+        </td>
+       </tr>
+        <tr>
+          <td>Sean</td>
+          <td>17:00</td>
+          <td>19:00</td>
+          <td>10-9-2018</td>
+          <td>UBC</td>
+          <td>
+            <button type="button" class="btn btn-danger">Delete</button>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Update</button>           
+        </td>
+       </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div>
+  <h2>Create Appointment</h2>
+  <form>
+    <div>
+    <!--
+    <div class="form-group form-group-lg">
+      <label class="col-sm-2 control-label" for="lg">Realtor</label>
+      <label class="col-sm-2 control-label" for="lg">Time</label>
+      <label class="col-sm-2 control-label" for="lg">Location</label>
+    </div> 
+    -->
+
+      <div class="form-group col-md-3">
+        <label>Realtor</label>
+        <!--<input type="" class="form-control" placeholder="Name">-->
+        <select id="options" class="form-control">
+          <option>Select Realtor</option>
+          </select>
+      </div>
+      <div class="form-group col-md-2">
+        <label>Start Time</label>
+        <input type="" id="in1" class="form-control" placeholder="XX:XX">
+      </div>
+      <div class="form-group col-md-2">
+          <label>End Time</label>
+          <input type="" id="in2" class="form-control" placeholder="XX:XX">
+     </div>
+     <div class="form-group col-md-2">
+        <label>Date</label>
+        <input type="" id="in3" class="form-control" placeholder="XX:XX">
+     </div>
+      <div class="form-group col-md-2">
+        <label>Location</label>
+        <input type="" id="in4" class="form-control" placeholder="">
+      </div>
+      <div id="createApptButton" class="form-group col-md-2">
+        <button type="button" onclick="createAppointment();" class="btn btn-success">Create</button>
+      </div>
+    </div>
+  </form>
+</div>
+<br>
+<div>
+    <h1>Open Houses</h1>
+    <div id="AppointmentTable"> 
+      <table class="table">
+       <thead>
+          <tr>
+            <th>Listing ID</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>12312</td>
+            <td>15:00</td>
+            <td>17:00:00</td>
+            <td>10-9-2018</td>
+         </tr>
+          <tr>
+            <td>12121</td>
+            <td>17:00</td>
+            <td>19:00</td>
+            <td>10-9-2018</td>
+         </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Update Appointment</h4>
+          </div>
+          <div class="modal-body">
+            <label>Realtor</label>
+              <!--<input type="" class="form-control" placeholder="Name">-->
+            <select class="form-control">
+            <option>Select Realtor</option>
+            <option>Option 1</option>
+            <option>Option 2</option>
+            <option>Option 3</option>
+            <option>Option 4</option>
+            <option>Option 5</option>
+            </select>
+            <label>Start Time</label>
+            <input id="editStartTime" type="" class="form-control" placeholder="XX:XX">
+            <label>End Time</label>
+            <input id="editEndTime" type="" class="form-control" placeholder="XX:XX">
+            <label>Date</label>
+            <input id="editDate" type="" class="form-control" placeholder=""> 
+            <label>Location</label>
+            <input id="editLocation"type="" class="form-control" placeholder="">   
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">Update</button>
+          </div>
+        </div>
+        
+    </div>
+  </div>
+</div>
+
+<div>
+</div>
+
+</body>
+</html>
