@@ -260,12 +260,31 @@ function filterNearby(){
     var nearbyCondition = [];
     var tempNearbyList = {};
     var tempListingDetails = {};
-    if(document.getElementById("filterNearbyRestaurant").checked == true)
-        nearbyCondition.push("Restaurant");
-    if(document.getElementById("filterNearbyGym").checked == true)
-        nearbyCondition.push("Gym");
-    if(document.getElementById("filterNearbyMall").checked == true)
-        nearbyCondition.push("Mall");
+    var endPoints ="facilities";
+    if(document.getElementById("filterNearbyRestaurant").checked == true){
+        document.getElementById("filterAll").checked = false;
+        nearbyCondition.push("Restaurant");}
+    if(document.getElementById("filterNearbyGym").checked == true){
+        document.getElementById("filterAll").checked = false;
+        nearbyCondition.push("Gym");}
+    if(document.getElementById("filterNearbyMall").checked == true){
+        document.getElementById("filterAll").checked = false;
+        nearbyCondition.push("Mall");}
+    if(document.getElementById("filterAll").checked == true){
+        document.getElementById("filterNearbyRestaurant").checked = false;
+        document.getElementById("filterNearbyGym").checked = false;
+        document.getElementById("filterNearbyMall").checked = false;
+        nearbyCondition = [];
+        ajaxGet("https://evening-fjord-94245.herokuapp.com/postsNearAllFacilityType" , function(success){
+            //tempNearbyList = success;
+            listings.details =success;
+            console.log(success);
+            $("#helperContainer").remove();
+            renderListingsAll(document.getElementById("list"),listings);
+        },function(error){
+            console.log("ERROR")
+        })  
+    }
     ajaxGet("https://evening-fjord-94245.herokuapp.com/facilities", function(success){
             //tempNearbyList = success;
             for(var i = 0; i<nearbyCondition.length; i++){
@@ -284,7 +303,6 @@ function filterNearby(){
                     if(tempListingDetails[key2].listingID == tempNearbyList[key1]){
                         listings.details[counter1] = tempListingDetails[key2]
                         counter1++;
-                        break;
                     }
                 }
             }}
@@ -293,8 +311,7 @@ function filterNearby(){
             renderListingsAll(document.getElementById("list"),listings);
         },function(error){
             console.log("ERROR")
-        })
-}
+        })}
 
 
 window.onload = function() {
