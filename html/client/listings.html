@@ -77,12 +77,12 @@
           </div>
        <label>Facilities</label>
        <div class="checkbox">
-          <label><input type="checkbox" value="">PlayGround</label>
+          <label><input type="checkbox" value="" id = "filterNearbyRestaurant">Restaurant</label>
       <div class="checkbox">
-          <label><input type="checkbox" value="">Elementry School</label>
+          <label><input type="checkbox" value="" id = "filterNearbyGym">Gym</label>
       </div>
       <div class="checkbox">
-           <label><input type="checkbox" value="">High School</label>
+           <label><input type="checkbox" value="" id ="filterNearbyMall">Shopping Mall</label>
       </div> 
       <button type="button" class="btn btn-primary" onclick ="filterListings()">Apply</button>
       <button type="button" class="btn btn-primary" onclick = "resetFilter()">Reset</button>
@@ -91,9 +91,6 @@
     <br>
       <div class="rows">
         <div id = "list">
-          <script>
-            renderListingsAll(document.getElementById("list"),listings);
-          </script>
         </div>
       </div>
     </br>
