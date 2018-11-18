@@ -295,7 +295,7 @@ function createNewListings(){
         console.log("POST SUCCESS"); 
         console.log(returnObject);
        // var divRem = document.getElementById("list");
-        ajaxGet(ROUTE_URL + ALL_POSTS , 
+        ajaxGet(ROUTE_URL + "/allUnsoldPosts" , 
         function(testObject){
             console.log("GET SUCCESS"); 
             console.log(testObject);
