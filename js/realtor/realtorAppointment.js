@@ -237,6 +237,8 @@ var createNewAppointment = function(element, info) {
     deleteButton.setAttribute("onclick", "deleteAppointment(" + info[6] + ")");
     var updateButton = document.createElement('button'); 
     updateButton.setAttribute("class", "btn btn-success"); 
+    updateButton.setAttribute("data-toggle", "modal");
+    updateButton.setAttribute("data-target","#myModal");
     updateButton.setAttribute("type", "button"); 
     updateButton.innerHTML = "Update"; 
     updateButton.setAttribute("onclick", "updateAppointment(" + info[6] + ")"); 
