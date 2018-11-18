@@ -5,6 +5,7 @@ var SELECTED_APPOINTMENT_ID;
 var ROUTE_URL = "https://evening-fjord-94245.herokuapp.com";
 var ALL_REALTORS = "/allRealtors"
 var APPOINTMENTS = "/appointments"; 
+var OPEN_HOUSES = "/openhouses"; 
 
 
 var ajaxGet = function(url, onSuccess, onError){
@@ -295,6 +296,62 @@ function updateAppointmentClick(){
 
 }
 
+var getOpenHouses = function(container){
+    while(container.firstChild){
+        container.removeChild(container.firstChild); 
+    }
+
+    ajaxGet(ROUTE_URL + OPEN_HOUSES, 
+            function(openHouses){
+                console.log(openHouses); 
+                listAllOpenHouses(container, openHouses);  
+            }, 
+            function(error){
+                console.log("getting client appointments failed"); 
+                console.log(error); 
+            });
+}
+
+var listAllOpenHouses = function(container, appointments) {
+
+    console.log("list open houses")
+    for(var key in appointments){
+        var obj = appointments[key];
+        console.log(obj); 
+        var info = []; 
+        info.push(obj.listingID); 
+        info.push(obj.startTime); 
+        info.push(obj.endTime); 
+        info.push(obj.date); 
+
+        createNewOpenHouse(container, info);
+    }
+}
+
+var createNewOpenHouse = function(element, info){
+    var tr = document.createElement("tr"); 
+
+    var td; 
+
+    td = document.createElement('td'); 
+    td.innerHTML = info[0];
+    tr.appendChild(td);  
+
+    td = document.createElement('td'); 
+    td.innerHTML = info[1];
+    tr.appendChild(td); 
+
+    td = document.createElement('td'); 
+    td.innerHTML = info[2];
+    tr.appendChild(td); 
+
+    td = document.createElement('td'); 
+    td.innerHTML = info[3]; //"10-9-2018";
+    tr.appendChild(td); 
+
+    element.appendChild(tr); 
+}
+
 window.onload = function() {
     console.log('Hello')
 
@@ -323,4 +380,8 @@ window.onload = function() {
     //adds all the clients appointments in 
     var smth = document.getElementById("tBodyAppointments"); 
     getAppointments(smth); 
+
+    //adds all the open houses in 
+    var openHouse = document.getElementById('tBodyOpenHouses'); 
+    getOpenHouses(openHouse); 
 }
