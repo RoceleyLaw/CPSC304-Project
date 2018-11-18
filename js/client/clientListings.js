@@ -186,6 +186,27 @@ function renderListings(container, instance, listName){
     div2.appendChild(postalCode);
     div2.appendChild(nBedrooms);
     div2.appendChild(nBathrooms);
+    if(instance.details[listName].hasOwnProperty('houseNumber')){
+        console.log("HOUSE")
+        var nHouseNumber = document.createElement("p");
+        var nLotSize = document.createElement("p");
+        var nHouseNumberText = document.createTextNode("LOT SIZE: "+ instance.details[listName].lotSize);
+        var nLotSizeText = document.createTextNode("HOUSE NUMBER: "+ instance.details[listName].houseNumber);
+        nHouseNumber.appendChild(nHouseNumberText);
+        nLotSize.appendChild(nLotSizeText);
+        div2.appendChild(nHouseNumber);
+        div2.appendChild(nLotSize);
+    }
+    else if(instance.details[listName].hasOwnProperty('buildingNumber')){
+        var nbuildingNumber = document.createElement("p");
+        var napartmentRoomNumber = document.createElement("p");
+        var nBuildingNumberText = document.createTextNode("BUILDING NUMBER: "+ instance.details[listName].buildingNumber);
+        var napartmentRoomNumberText = document.createTextNode("ROOM NUMBER: "+ instance.details[listName].apartmentRoomNumber);
+        nbuildingNumber.appendChild(nBuildingNumberText);
+        napartmentRoomNumber.appendChild(napartmentRoomNumberText);
+        div2.appendChild(nbuildingNumber);
+        div2.appendChild(napartmentRoomNumberText);
+    }
     div2.appendChild(pX);
 
     div1.appendChild(div2);
