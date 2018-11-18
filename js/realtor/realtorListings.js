@@ -508,9 +508,9 @@ function filterNearby(){
         document.getElementById("filterAll").checked = false;
         nearbyCondition.push("Mall");}
     if(document.getElementById("filterAll").checked == true){
-        document.getElementById("filterNearbyRestaurant").checked = false;
-        document.getElementById("filterNearbyGym").checked = false;
-        document.getElementById("filterNearbyMall").checked = false;
+        document.getElementById("filterNearbyRestaurant").disabled = true;
+        document.getElementById("filterNearbyGym").disabled = true;
+        document.getElementById("filterNearbyMall").disabled = true;
         nearbyCondition = [];
         ajaxGet("https://evening-fjord-94245.herokuapp.com/postsNearAllFacilityType" , function(success){
             //tempNearbyList = success;
