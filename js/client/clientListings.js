@@ -154,13 +154,40 @@ function renderListings(container, instance, listName){
 
     var h4X = document.createElement("h4");
     var pX = document.createElement("p");
-    var h4XText = document.createTextNode("ID: " + instance.details[listName].listingID);
-    var pXText = document.createTextNode("PRICE: " + instance.details[listName].listedPrice);
+    var streetName = document.createElement("p");
+    var city = document.createElement("p");
+    var province = document.createElement("p");
+    var postalCode = document.createElement("p");
+    var nBedrooms = document.createElement("p");
+    var nBathrooms = document.createElement("p");
+    var h4XText = document.createTextNode("ID: "+ instance.details[listName].listingID);
+    var pXText = document.createTextNode("PRICE: $" + instance.details[listName].listedPrice);
+    var streetNameText = document.createTextNode("ADDRESS: "+ instance.details[listName].streetName);
+    var cityText = document.createTextNode("CITY: "+ instance.details[listName].city);
+    var provinceText = document.createTextNode("PROVINCE: "+ instance.details[listName].province);
+    var postalCodeText = document.createTextNode("POSTAL CODE: "+ instance.details[listName].postalCode);
+    var nBedroomsText = document.createTextNode("NO. OF BEDROOMS: "+ instance.details[listName].bedroom);
+    var nBathroomsText = document.createTextNode("NO. OF BATHROOMS: "+ instance.details[listName].bathroom);
+
     h4X.appendChild(h4XText);
     pX.appendChild(pXText);
+    streetName.appendChild(streetNameText);
+    city.appendChild(cityText);
+    province.appendChild(provinceText);
+    postalCode.appendChild(postalCodeText);
+    nBedrooms.appendChild(nBedroomsText);
+    nBathrooms.appendChild(nBathroomsText);
 
     div2.appendChild(h4X);
     div2.appendChild(pX);
+    div2.appendChild(streetName);
+    div2.appendChild(city);
+    div2.appendChild(province);
+    div2.appendChild(postalCode);
+    div2.appendChild(nBedrooms);
+    div2.appendChild(nBathrooms);
+    div2.appendChild(pX);
+
     div1.appendChild(div2);
     // liX.appendChild(div1);
 

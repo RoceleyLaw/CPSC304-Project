@@ -1,6 +1,7 @@
 //GLOBAL VARIABLES 
 var REALTOR_NUMBER; 
 var POSTAL_CODES=[];
+var PHONE_NO =[];
 
 //testing request
 
@@ -140,10 +141,23 @@ ajaxGet("https://evening-fjord-94245.herokuapp.com/postalcodes", function(succes
     for(var keys in success){
         POSTAL_CODES.push(success[keys].postalCode);
     }
+    populateDropDownPC();
     console.log("SUCCESS GET POSTAL CODE")
 }, function(error){
     console.log("Failed")
     POSTAL_CODES = null;
+});
+
+
+ajaxGet("https://evening-fjord-94245.herokuapp.com/allClients", function(success){
+    for(var keys in success){
+        PHONE_NO.push(success[keys].phoneNumber);
+    }
+    populateDropDownPhone();
+    console.log("SUCCESS GET PHONE NO");
+}, function(error){
+    console.log("Failed")
+    PHONE_NO = null;
 });
 
 ajaxGet("https://evening-fjord-94245.herokuapp.com/allUnsoldPosts", function(success){
@@ -251,7 +265,7 @@ function createNewListings(){
     var endPoint;
     obj.listedPrice = document.getElementById("inputListedPrice").value;
     obj.streetName = document.getElementById("inputStreetName").value;
-    obj.postalCode = document.getElementById("inputPostalCode").value;
+    obj.postalCode = document.getElementById("selectPostalCode").value;
     obj.city = document.getElementById("inputCity").value;
     obj.province = document.getElementById("inputProvince").value;
     obj.bathroom = document.getElementById("inputBathrooms").value;
@@ -389,6 +403,7 @@ function filterListings(){
             //$("#helperContainer").remove();
             //document.location.reload();
             listings.details = success;
+            console.log(listings.details)
             filterNearby();
             //renderListingsAll(document.getElementById("list"),listings);
         },function(error){
@@ -421,8 +436,35 @@ function filterListings(){
     }
 }
 
+function populateDropDownPC(){
+    var select = document.getElementById("selectPostalCode"); 
+
+for(var i = 0; i < POSTAL_CODES.length; i++) {
+    var opt = POSTAL_CODES[i];
+    var el = document.createElement("option");
+    el.textContent = opt;
+    el.value = opt;
+    select.appendChild(el);
+}
+}
+
+function populateDropDownPhone(){
+    var select = document.getElementById("selectPhoneNumber"); 
+
+for(var i = 0; i < PHONE_NO.length; i++) {
+    var opt = PHONE_NO[i];
+    var el = document.createElement("option");
+    el.textContent = opt;
+    el.value = opt;
+    select.appendChild(el);
+}
+}
+
 function resetFilter(){
     document.getElementById("filterBoth").checked = true;
+    document.getElementById("filterNearbyRestaurant").checked = false;
+    document.getElementById("filterNearbyGym").checked = false;
+    document.getElementById("filterNearbyMall").checked = false;
     filterListings();
 }
 
@@ -457,7 +499,6 @@ function filterNearby(){
                     if(tempListingDetails[key2].listingID == tempNearbyList[key1]){
                         listings.details[counter1] = tempListingDetails[key2]
                         counter1++;
-                        break;
                     }
                 }
             }}
@@ -477,7 +518,7 @@ function soldListings(){
     obj.finalPrice = document.getElementById("soldFinalPrice").value;
     obj.soldDate = document.getElementById("soldDate").value;
     obj.completionDate = document.getElementById("soldCompletionDate").value;
-    obj.phoneNumber = document.getElementById("soldClientPhoneNumber").value;
+    obj.phoneNumber = document.getElementById("selectPhoneNumber").value;
     obj.listingID = globalSoldNodeId;
     obj.licenseNumber = REALTOR_NUMBER;
     var newJSON = JSON.stringify(obj);
@@ -524,7 +565,7 @@ window.onload = function() {
     var element4 = document.getElementById('menuHeaders4');
     element4.setAttribute("href",url4);
 
-    ajaxGet(ROUTE_URL + ALL_POSTS , 
+    ajaxGet(ROUTE_URL + "/AllUnsoldPosts" , 
         function(testObject){
             console.log("GET SUCCESS"); 
             console.log(testObject);
