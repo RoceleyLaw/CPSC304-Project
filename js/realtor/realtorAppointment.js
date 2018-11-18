@@ -7,6 +7,7 @@ var POST_ROUTE = "https://evening-fjord-94245.herokuapp.com/";
 var ROUTE_URL = "https://evening-fjord-94245.herokuapp.com";
 var ALL_LISTINGS = "/allUnsoldPosts"
 var APPOINTMENTS = "/appointments"; 
+var OPEN_HOUSES = "/openhouses"; 
 
 
 
@@ -193,9 +194,33 @@ var createOpenHouse = function(){
     obj.listingID = document.getElementById("listingOptions").value;;  
     obj.startTime = document.getElementById("inputStartTime").value; 
     obj.endTime = document.getElementById("inputEndTime").value; 
-    obj.date = document.getElementById("inputDate").value;    
+    obj.date = document.getElementById("inputDate").value;  
+    obj.licenseNumber = REALTOR_NUMBER;   
     var newJSON = JSON.stringify(obj); 
     console.log(newJSON); 
+
+
+    var check1 = obj.startTime
+    var array2 = check1.split(':'); 
+    var check2 = obj.endTime
+    var array3 = check2.split(':'); 
+
+    if((array2[0]<= array3[0]) && (array2[1]<= array3[1])){
+        //now post it 
+        ajaxPost(ROUTE_URL + OPEN_HOUSES,
+            function(payload){
+                console.log(payload); 
+                location.reload(); 
+            }, 
+            function(error){
+                console.log(error); 
+                console.log("error here"); 
+            }, 
+            newJSON);
+    }
+    else{
+        alert("Please Check Start and End Time");
+    }
 }
 
 /*
@@ -338,6 +363,62 @@ function updateAppointmentClick(){
 
 }
 
+var getOpenHouses = function(container){
+    while(container.firstChild){
+        container.removeChild(container.firstChild); 
+    }
+
+    ajaxGet(ROUTE_URL + OPEN_HOUSES, 
+            function(openHouses){
+                console.log(openHouses); 
+                listAllOpenHouses(container, openHouses);  
+            }, 
+            function(error){
+                console.log("getting client appointments failed"); 
+                console.log(error); 
+            });
+}
+
+var listAllOpenHouses = function(container, appointments) {
+
+    console.log("list open houses")
+    for(var key in appointments){
+        var obj = appointments[key];
+        console.log(obj); 
+        var info = []; 
+        info.push(obj.listingID); 
+        info.push(obj.startTime); 
+        info.push(obj.endTime); 
+        info.push(obj.date); 
+
+        createNewOpenHouse(container, info);
+    }
+}
+
+var createNewOpenHouse = function(element, info){
+    var tr = document.createElement("tr"); 
+
+    var td; 
+
+    td = document.createElement('td'); 
+    td.innerHTML = info[0];
+    tr.appendChild(td);  
+
+    td = document.createElement('td'); 
+    td.innerHTML = info[1];
+    tr.appendChild(td); 
+
+    td = document.createElement('td'); 
+    td.innerHTML = info[2];
+    tr.appendChild(td); 
+
+    td = document.createElement('td'); 
+    td.innerHTML = info[3]; //"10-9-2018";
+    tr.appendChild(td); 
+
+    element.appendChild(tr); 
+}
+
 
 window.onload = function() {
     console.log('Realtor Appointment');
@@ -373,6 +454,11 @@ window.onload = function() {
 
     var smth = document.getElementById("realtorBodyAppointments"); 
     getAppointments(smth); 
+
+
+    //adds all the open houses in 
+    var openHouse = document.getElementById('tBodyOpenHouses2'); 
+    getOpenHouses(openHouse); 
 
 
 }
