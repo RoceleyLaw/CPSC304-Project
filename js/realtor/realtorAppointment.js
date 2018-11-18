@@ -1,5 +1,6 @@
 //GLOBAL VARIABLES 
 var REALTOR_NUMBER; 
+var SELECTED_APPOINTMENT_ID; 
 
 var POST_ROUTE = "https://evening-fjord-94245.herokuapp.com/";
 
@@ -301,6 +302,40 @@ function deleteAppointment(id){
 
 function updateAppointment(id) {
     console.log("UPDATE: " + id); 
+    SELECTED_APPOINTMENT_ID = id; 
+}
+
+function updateAppointmentClick(){
+    var obj = new Object(); 
+    obj.id = SELECTED_APPOINTMENT_ID; 
+    obj.startTime = document.getElementById("in1").value; 
+    obj.endTime = document.getElementById("in2").value; 
+    obj.date = document.getElementById("in3").value; 
+    obj.location = document.getElementById("in4").value; 
+
+    var check1 = obj.startTime
+    var array2 = check1.split(':'); 
+    var check2 = obj.endTime
+    var array3 = check2.split(':'); 
+
+    if((array2[0]<= array3[0]) && (array2[1]<= array3[1])){
+        console.log(obj); 
+        ajaxPut(ROUTE_URL + APPOINTMENTS + "/" + obj.id, 
+                function(response){
+                    console.log(response); 
+                    console.log("PUT Success"); 
+                    location.reload(); 
+                }, 
+                function(error){
+                    console.log("update appointment error"); 
+                    console.log(error); 
+                }, 
+                obj); 
+    }
+    else{
+        alert("Please Check Start and End Time");
+    }
+
 }
 
 
