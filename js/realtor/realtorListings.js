@@ -398,7 +398,7 @@ function editListingsUpdate(){
 
 function filterListings(){
     if(document.getElementById("filterHouse").checked == true){
-        ajaxGet("https://evening-fjord-94245.herokuapp.com/allHouses", function(success){
+        ajaxGet("https://evening-fjord-94245.herokuapp.com/unsoldHouses", function(success){
             console.log(success);
             //$("#helperContainer").remove();
             //document.location.reload();
@@ -411,7 +411,7 @@ function filterListings(){
         })
     }
     else if(document.getElementById("filterApartment").checked == true){
-        ajaxGet("https://evening-fjord-94245.herokuapp.com/allApts", function(success){
+        ajaxGet("https://evening-fjord-94245.herokuapp.com/unsoldApts", function(success){
             console.log(success);
            // $("#helperContainer").remove();
             //document.location.reload();
