@@ -38,6 +38,12 @@ var ajaxGet = function(url, onSuccess, onError){
     xhttp.open("GET", url, true);
     xhttp.send();
 }
+var soldListingDetails = function(url){
+    this.details = {};
+    this.url = url;
+}
+
+var soldListings = new soldListingDetails("https://evening-fjord-94245.herokuapp.com");
 
 var addTopRealtorEntry = function(element, info) {
     var tr = document.createElement("tr"); 
@@ -84,6 +90,60 @@ var getToRealtors = function () {
 
 }
 
+// ajaxGet("https://evening-fjord-94245.herokuapp.com/soldlistings/5770319", function(success){
+//     console.log(success)
+//     soldListings.details  = success;
+// }, function(error){
+//     console.log("Failed")
+//     soldListings.details  = null;
+// });
+
+function renderSoldList(container, instance, listName){
+    var tbody = document.createElement(container);
+    tbody.setAttribute("id", instance.details[listName].listingID)
+
+    var tr = document.createElement("tr");
+
+    var th1 = document.createElement("td");
+    var listingsIDVal = document.createTextNode(instance.details[listName].listingID);
+    th1.appendChild(listingsIDVal);
+    tr.appendChild(th1);
+
+    var th2 = document.createElement("td");
+    var listingCompletionDateVal =  document.createTextNode(instance.details[listName].completionDate);
+    th2.appendChild(listingCompletionDateVal);
+    tr.appendChild(th2);
+
+    var th3 = document.createElement("td");
+    var soldDateVal = document.createTextNode(instance.details[listName].soldDate)
+    th3.appendChild(soldDateVal);
+    tr.appendChild(th3);
+
+    var th4 = document.createElement("td");
+    var finalPriceVal = document.createTextNode(instance.details[listName].finalPrice)
+    th4.appendChild(finalPriceVal);
+    tr.appendChild(th4);
+
+    var th5 = document.createElement("td");
+    var cPhoneNumberVal = document.createTextNode(instance.details[listName].phoneNumber)
+    th5.appendChild(cPhoneNumberVal);
+    tr.appendChild(th5);
+
+   // tbody.appendChild(tr);
+
+    return tr;
+}
+
+function renderSoldListAll(container, instance){
+    var keys;
+	for(keys in instance.details){
+		//console.log("print this")
+        var cont =  renderSoldList("tbody", instance, keys);
+        console.log(cont);
+        container.appendChild(cont);
+    }
+}
+
 window.onload = function() {
     console.log('Sold Listings');
 
@@ -114,6 +174,18 @@ window.onload = function() {
     element4.setAttribute("href",url4);
     
     getToRealtors();
+    ajaxGet("https://evening-fjord-94245.herokuapp.com/soldlistings/" + REALTOR_NUMBER ,
+        function(testObject){
+            console.log("GET SUCCESS"); 
+            console.log(testObject);
+            soldListings.details  = testObject;
+            renderSoldListAll(document.getElementById("soldTable"),soldListings);
+        },
+        function(error){
+            console.log("GET ERROR"); 
+            console.log(error);
+            soldListings.details  = null;
+        }); 
 
 
 }
