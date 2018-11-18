@@ -146,7 +146,7 @@ ajaxGet("https://evening-fjord-94245.herokuapp.com/postalcodes", function(succes
     POSTAL_CODES = null;
 });
 
-ajaxGet("https://evening-fjord-94245.herokuapp.com/allposts", function(success){
+ajaxGet("https://evening-fjord-94245.herokuapp.com/allUnsoldPosts", function(success){
     listings.details = success;
 }, function(error){
     console.log("Failed")
@@ -194,6 +194,7 @@ function renderListings(container, instance, listName){
     buttonSold.setAttribute("class", "btn btn-danger");
 
     buttonSold.setAttribute("data-toggle", "modal");
+    buttonSold.setAttribute("onclick", "soldListingsSetUp(" + ids + ")");
     buttonSold.setAttribute("data-target","#soldModal");
     var buttonSoldText = document.createTextNode("Sold");
     buttonSold.appendChild(buttonSoldText);
@@ -331,6 +332,7 @@ function getParentNode(){
 }
 
 var globalID, globalistedPrice,globalstreetname, globalpostalCode, globalcity, globalprovince, globalbathroom,globalbedroom;
+var globalSoldNodeId;
 
 function editListingsGet(id){
     console.log(id);
@@ -346,13 +348,6 @@ function editListingsGet(id){
             document.getElementById("editBathrooms").value = getInfo[0].bathroom;
             document.getElementById("editBedrooms").value = getInfo[0].bedroom;
             globalID = id; 
-            // globalistedPrice = document.getElementById("editListedPrice").value;
-            // globalstreetname =  document.getElementById("editStreetName").value;
-            // globalpostalCode = document.getElementById("editPostalCode").value;
-            // globalcity =  document.getElementById("editCity").value;
-            // globalprovince = document.getElementById("editProvince").value;
-            // globalbathroom = document.getElementById("editBathrooms").value
-            // globalbedroom = document.getElementById("editBedrooms").value
             console.log(getInfo[0]);
         },
         function(error){
@@ -413,7 +408,7 @@ function filterListings(){
         })
     }
     else{
-        ajaxGet("https://evening-fjord-94245.herokuapp.com/allPosts", function(success){
+        ajaxGet("https://evening-fjord-94245.herokuapp.com/allUnsoldPosts", function(success){
             console.log(success);
             //filterNearby();
             //document.location.reload();
@@ -472,6 +467,31 @@ function filterNearby(){
         },function(error){
             console.log("ERROR")
         })
+}
+function soldListingsSetUp(id){
+    globalSoldNodeId = id;
+}
+
+function soldListings(){
+    var obj = new Object();
+    obj.finalPrice = document.getElementById("soldFinalPrice").value;
+    obj.soldDate = document.getElementById("soldDate").value;
+    obj.completionDate = document.getElementById("soldCompletionDate").value;
+    obj.phoneNumber = document.getElementById("soldClientPhoneNumber").value;
+    obj.listingID = globalSoldNodeId;
+    obj.licenseNumber = REALTOR_NUMBER;
+    var newJSON = JSON.stringify(obj);
+    ajaxPost("https://evening-fjord-94245.herokuapp.com/soldlistings", 
+    function(returnObject){
+        console.log("SOLD SUCCESS"); 
+        console.log(returnObject);
+        var removeThis = document.getElementById(globalSoldNodeId);
+        removeThis.remove();
+    }, 
+    function(error){
+        console.log("SOLD ERROR"); 
+        console.log(error); 
+    }, newJSON);
 }
 
 
